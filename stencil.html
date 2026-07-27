@@ -4,12 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AI에게 자유를 주면 더 창의적일까? — 신영빈</title>
-<meta name="description" content="신영빈 포트폴리오 — 더 나은 정답보다, 더 나은 문제를 찾습니다. 떠리·오늘의 식냥·미리캔버스 AI 프로젝트 기록.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="AI에게 자유를 주면 더 창의적일까? — 신영빈">
-<meta property="og:description" content="더 나은 정답보다, 더 나은 문제를 찾습니다.">
-<meta property="og:url" content="https://youngbin03.github.io/stencil.html">
-<meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <style>
   :root{
@@ -164,7 +158,9 @@
   /* ---------- note-panel 밀도 ---------- */
   .note-panel{margin:40px 20px;padding:32px 30px;}
   .note-panel ol{gap:13px;}
-  .note-panel li{line-height:1.48;word-break:keep-all;word-spacing:-.05em;gap:8px;}
+  /* li를 flex로 두면 <strong>이 별도 flex item으로 쪼개져 텍스트가 갈라짐 → block + 절대배치 번호 */
+  .note-panel li{display:block;position:relative;padding-left:26px;line-height:1.48;word-break:keep-all;overflow-wrap:break-word;word-spacing:-.05em;}
+  .note-panel li::before{position:absolute;left:0;top:0;}
   .note-panel li strong{letter-spacing:-.015em;margin-right:-1px;}
   /* ---------- byline role ---------- */
   .byline .role{margin-top:12px;font-size:15px;color:var(--sub);line-height:1.65;}
@@ -182,15 +178,23 @@
   }
   .nextup .k{font-size:13px;color:var(--mute);}
   .nextup .v{display:block;margin-top:6px;font-size:18px;font-weight:700;color:var(--ink);letter-spacing:-.01em;}
+  .nextup > span{min-width:0;}
+  .nextup svg{flex-shrink:0;}
   .nextup:hover .v{color:var(--sub);}
   @media (max-width:640px){
     blockquote.pull{margin:40px 0;font-size:18px;padding-left:16px;border-left-width:4px;}
-    .metrics{grid-template-columns:repeat(2,1fr);}
-    .media{margin-left:0;margin-right:0;}
-    .note-panel{margin:32px 0;padding:26px 22px;}
+    /* 성과 3개 한 줄 유지 */
+    .metrics{grid-template-columns:repeat(3,1fr);gap:16px 10px;}
+    .metrics .k{font-size:12px;}
+    .metrics .v{font-size:16px;margin-top:5px;}
+    /* 이미지: 컨테이너 패딩(24px)을 상쇄해 좌우 여백 최소화(8px) */
+    .media{margin-left:-16px;margin-right:-16px;}
+    .note-panel{margin:32px 0;padding:26px 20px;}
     .note-panel ol{gap:12px;}
-    .metrics .v{font-size:18px;}
-    .nextup{padding:22px 20px;flex-direction:column;align-items:flex-start;}
+    .note-panel li{padding-left:23px;}
+    /* 화살표 줄바꿈 방지 — 가로 배치 유지 */
+    .nextup{padding:22px 20px;}
+    .nextup .v{font-size:16px;}
   }
 
   /* ---------- reveal ---------- */

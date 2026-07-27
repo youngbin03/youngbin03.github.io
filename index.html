@@ -27,13 +27,15 @@
     --container:720px;
   }
   *{margin:0;padding:0;box-sizing:border-box;}
-  html{scroll-behavior:auto;}
+  /* 가로 오버플로 차단 — iOS Safari는 body만으로는 가로 팬을 막지 못함.
+     clip은 스크롤 컨테이너를 만들지 않아 fixed nav·Lenis·패럴랙스에 안전 */
+  html{scroll-behavior:auto;overflow-x:hidden;overflow-x:clip;}
   body{
     background:var(--bg);
     color:var(--text);
     font-family:'Pretendard Variable',Pretendard,system-ui,-apple-system,sans-serif;
     -webkit-font-smoothing:antialiased;
-    overflow-x:hidden;
+    overflow-x:hidden;overflow-x:clip;
   }
   ::selection{background:rgba(87,229,140,.3);}
 
