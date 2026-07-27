@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>무료로 줘도 사람들이 오지 않는다면? — 신영빈</title>
+<meta name="description" content="신영빈 포트폴리오 — 더 나은 정답보다, 더 나은 문제를 찾습니다. 떠리·오늘의 식냥·미리캔버스 AI 프로젝트 기록.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="무료로 줘도 사람들이 오지 않는다면? — 신영빈">
+<meta property="og:description" content="더 나은 정답보다, 더 나은 문제를 찾습니다.">
+<meta property="og:url" content="https://youngbin03.github.io/thurry-end.html">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+  :root{
+    --bg:#ffffff;
+    --ink:#191f28;      /* 헤드라인 */
+    --body:#333d4b;     /* 본문 */
+    --sub:#4e5968;      /* 보조 텍스트 */
+    --mute:#8b95a1;     /* 날짜·캡션 */
+    --chip:#f2f4f6;     /* 태그 칩 */
+    --panel:#f7f8fa;    /* 회색 패널 */
+    --accent:#57e58c;
+    --r-panel:24px;
+    --container:720px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    background:var(--bg);color:var(--body);
+    font-family:'Pretendard Variable',Pretendard,system-ui,-apple-system,sans-serif;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  ::selection{background:rgba(87,229,140,.3);}
+  a{color:inherit;text-decoration:none;}
+
+  /* ---------- nav (라이트) ---------- */
+  nav{
+    position:fixed;inset:0 0 auto 0;z-index:100;
+    display:flex;justify-content:space-between;align-items:center;
+    padding:20px 28px;
+    background:rgba(255,255,255,.7);
+    backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  }
+  nav .logo{font-size:15px;font-weight:600;letter-spacing:-.01em;color:var(--ink);}
+  nav .back{font-size:14px;font-weight:600;color:var(--sub);display:flex;align-items:center;gap:6px;}
+  nav .back:hover{color:var(--ink);}
+
+  .container{max-width:var(--container);margin:0 auto;padding:0 24px;}
+
+  /* ---------- article head ---------- */
+  .article-head{padding-top:150px;} /* 좌우 패딩은 .container(24px) 유지 */
+  h1{
+    font-size:clamp(30px,5.4vw,44px);
+    font-weight:700;line-height:1.32;letter-spacing:-.02em;
+    color:var(--ink);
+    word-break:keep-all;
+  }
+  .tags{margin-top:22px;display:flex;gap:8px;flex-wrap:wrap;}
+  .tag{
+    padding:7px 14px;border-radius:8px;
+    background:var(--chip);font-size:14px;font-weight:500;color:var(--sub);
+  }
+  .byline{margin-top:44px;}
+  .byline .who{font-size:16px;font-weight:700;color:var(--ink);}
+  .byline .date{margin-top:6px;font-size:15px;color:var(--mute);}
+
+  /* ---------- body ---------- */
+  .article-body{padding-top:56px;padding-bottom:40px;}
+  .article-body p{font-size:17px;line-height:1.8;letter-spacing:-.005em;}
+  .article-body p + p{margin-top:26px;}
+  .article-body p strong{color:var(--ink);font-weight:700;}
+  h2{
+    margin:72px 0 24px;
+    font-size:28px;font-weight:700;letter-spacing:-.015em;line-height:1.4;
+    color:var(--ink);
+  }
+  h3{
+    margin:52px 0 20px;
+    font-size:22px;font-weight:700;letter-spacing:-.01em;
+    color:var(--ink);
+  }
+
+  /* ---------- media ---------- */
+  .media{
+    margin:48px 0;
+    border-radius:16px;overflow:hidden;
+    background:#050506;
+  }
+  .media video,.media img{width:100%;height:auto;display:block;}
+  .media.panel{background:var(--panel);padding:40px;}
+  .media .caption{padding:14px 4px 0;font-size:14px;color:var(--mute);text-align:center;}
+
+  /* ---------- 회색 패널: 번호 리스트 ---------- */
+  .note-panel{
+    margin:48px 0;
+    background:var(--panel);border-radius:var(--r-panel);
+    padding:48px 44px;
+  }
+  .note-panel ol{list-style:none;counter-reset:n;display:flex;flex-direction:column;gap:24px;}
+  .note-panel li{
+    counter-increment:n;
+    display:flex;gap:14px;
+    font-size:17px;line-height:1.7;color:var(--body);
+  }
+  .note-panel li::before{content:counter(n)".";font-weight:600;color:var(--body);flex-shrink:0;}
+  .note-panel li strong{color:var(--ink);font-weight:700;}
+
+  /* ---------- 불릿 ---------- */
+  .points{margin:32px 0;display:flex;flex-direction:column;gap:28px;list-style:none;}
+  .points li{position:relative;padding-left:22px;font-size:17px;line-height:1.8;}
+  .points li::before{content:"";position:absolute;left:4px;top:13px;width:5px;height:5px;border-radius:50%;background:var(--body);}
+  .points li strong{display:block;color:var(--ink);font-weight:700;margin-bottom:6px;}
+
+  /* ---------- footer ---------- */
+  .article-foot{padding-top:60px;padding-bottom:120px;}
+  .article-foot .divider{height:1px;background:#e8ebee;margin-bottom:40px;}
+  .article-foot a{font-size:16px;font-weight:600;color:var(--sub);display:inline-flex;align-items:center;gap:8px;}
+  .article-foot a:hover{color:var(--ink);}
+
+  /* ---------- mobile (≤640px) ---------- */
+  /* 좌우 여백은 어떤 화면에서도 24px 아래로 내려가지 않음 */
+  @media (max-width:640px){
+    nav{padding:16px 20px;}
+    .article-head{padding-top:116px;}
+    h1{font-size:clamp(25px,7.6vw,30px);line-height:1.38;}
+    .tags{margin-top:18px;}
+    .byline{margin-top:32px;}
+    .article-body{padding-top:44px;padding-bottom:24px;}
+    .article-body p{font-size:16px;line-height:1.75;}
+    .article-body p + p{margin-top:22px;}
+    h2{margin:56px 0 20px;font-size:23px;}
+    h3{margin:40px 0 16px;font-size:19px;}
+    .media{margin:36px 0;border-radius:12px;}
+    .note-panel{margin:36px 0;padding:32px 24px;border-radius:20px;}
+    .note-panel ol{gap:20px;}
+    .note-panel li{font-size:16px;}
+    .points{gap:24px;}
+    .points li{font-size:16px;padding-left:20px;}
+    .article-foot{padding-top:40px;padding-bottom:90px;}
+  }
+
+
+  :root{--container:750px;}
+  /* ---------- pull quote ---------- */
+  blockquote.pull{
+    margin:56px 0;padding-left:20px;
+    border-left:5px solid var(--ink);
+    font-size:22px;font-weight:700;line-height:1.5;letter-spacing:-.015em;
+    color:var(--ink);word-break:keep-all;
+  }
+  /* ---------- metric strip ---------- */
+  .metrics{
+    margin-top:36px;padding:24px 0;
+    border-top:1px solid #e8ebee;border-bottom:1px solid #e8ebee;
+    display:grid;grid-template-columns:repeat(3,1fr);gap:22px 20px;
+  }
+  .metrics > div{text-align:center;}
+  .metrics .k{font-size:13px;color:var(--mute);line-height:1.4;}
+  /* ---------- media: 이미지는 배경 없이, 영상만 레터박스용 다크 ---------- */
+  .media{background:transparent;margin-left:20px;margin-right:20px;}
+  .media.vid{background:#050506;}
+  .metrics .v{margin-top:7px;font-size:20px;font-weight:700;letter-spacing:-.015em;color:var(--ink);line-height:1.3;}
+  /* ---------- note-panel 밀도 ---------- */
+  .note-panel{margin:40px 20px;padding:32px 30px;}
+  .note-panel ol{gap:13px;}
+  .note-panel li{line-height:1.48;word-break:keep-all;word-spacing:-.05em;gap:8px;}
+  .note-panel li strong{letter-spacing:-.015em;margin-right:-1px;}
+  /* ---------- byline role ---------- */
+  .byline .role{margin-top:12px;font-size:15px;color:var(--sub);line-height:1.65;}
+  /* ---------- media placeholder ---------- */
+  .media.ph{
+    background:var(--panel);min-height:240px;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .media.ph span{font-size:14px;color:var(--mute);letter-spacing:-.01em;text-align:center;padding:0 24px;line-height:1.6;}
+  /* ---------- next up ---------- */
+  .nextup{
+    margin-top:64px;padding:28px 32px;
+    background:var(--panel);border-radius:var(--r-panel);
+    display:flex;align-items:center;justify-content:space-between;gap:16px;
+  }
+  .nextup .k{font-size:13px;color:var(--mute);}
+  .nextup .v{display:block;margin-top:6px;font-size:18px;font-weight:700;color:var(--ink);letter-spacing:-.01em;}
+  .nextup:hover .v{color:var(--sub);}
+  @media (max-width:640px){
+    blockquote.pull{margin:40px 0;font-size:18px;padding-left:16px;border-left-width:4px;}
+    .metrics{grid-template-columns:repeat(2,1fr);}
+    .media{margin-left:0;margin-right:0;}
+    .note-panel{margin:32px 0;padding:26px 22px;}
+    .note-panel ol{gap:12px;}
+    .metrics .v{font-size:18px;}
+    .nextup{padding:22px 20px;flex-direction:column;align-items:flex-start;}
+  }
+
+  /* ---------- reveal ---------- */
+  html.js [data-reveal]{opacity:0;transform:translateY(24px);}
+  html.js [data-reveal].is-in{
+    opacity:1;transform:none;
+    transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1);
+  }
+  @media (prefers-reduced-motion:reduce){
+    html.js [data-reveal]{opacity:1;transform:none;transition:none;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="index.html">신영빈</a>
+  <a class="back" href="index.html">← 돌아가기</a>
+</nav>
+
+<header class="container article-head">
+  <h1>무료로 줘도<br>사람들이 오지 않는다면? | 떠리 #2</h1>
+  <div class="tags"><span class="tag">#플랫폼시장</span><span class="tag">#차별성</span><span class="tag">#종료결정</span></div>
+  <div class="byline">
+    <div class="date">2025.02 – 2025.09</div>
+    <div class="role">공동창업 · 5인 개발 팀 리드 · 매장 영업 · 운영 · 사업성 판단</div>
+  </div>
+  <div class="metrics">
+    <div><div class="k">월 최대 매출 (피크)</div><div class="v">200만 원</div></div>
+    <div><div class="k">6개월 누적 거래액</div><div class="v">500만 원</div></div>
+    <div><div class="k">0원 실험 재구매율</div><div class="v">4%</div></div>
+  </div>
+</header>
+
+<article class="container article-body">
+  <p>앞선 글에서는 앱 없이 수요를 증명하고, 결제·예약 시스템을 붙여 <strong>떠리</strong>를 출시한 뒤 매출을 키우기까지를 이야기했어요.</p>
+  <p>이번 글은 <strong>그래서 어떻게 망했는지</strong>에 대한 이야기예요. 제품을 만드는 것만큼, 사업을 굴리는 데서 배운 것도 많았거든요.</p>
+
+  <figure class="media" data-reveal>
+    <img src="reference/thurry-marketing.jpg" alt="">
+  </figure>
+
+
+  <h2>결정적인 판단 하나가 어긋났어요</h2>
+  <p>기존 서비스는 전부 <strong>랜덤 패키지</strong>였어요. 안에 뭐가 들었는지 모르지만 30~40% 저렴하게 묶음으로 사가는 구조죠. 저희는 <strong>개별 상품 선택</strong>으로 갔습니다.</p>
+  <p>근거는 사전 설문이었어요. 오픈채팅방 학생 <strong>170명 중 134명(약 79%)</strong>이 개별 상품을 선호했거든요. 원하는 것만 살 수 있고 최소 결제 금액도 낮으니 구매 장벽이 내려간다고 판단했죠.</p>
+  <p><strong>그런데 이 설문에 사장님 응답은 없었어요.</strong> 표본이 적어서 분석에서 뺐거든요. 사용자 79%는 확보하고, <strong>같은 방식을 매일 운영해야 하는 쪽의 데이터 없이</strong> 핵심 차별점을 정한 거예요.</p>
+
+  <h2>72곳이 거절한 이유를 들었어요</h2>
+  <p>앱을 출시하려면 팔 상품이 필요했어요. 성동구 베이커리를 <strong>하루 약 다섯 곳씩 한 달, 총 80곳 이상</strong> 방문했습니다. 그렇게 넉 달에 걸쳐 <strong>8곳</strong>이 입점했어요.</p>
+  <p>처음엔 남는 빵을 팔아준다니 당연히 좋아하실 거라 생각했어요. 그래서 <strong>거절을 영업 능력 부족으로 읽었습니다.</strong> 더 잘 준비해서 가면 되는 문제라고요.</p>
+  <p>돌이켜보면 이 숫자 자체가 이미 답이었어요. 현장에서 들은 이유는 저희 설득이 부족해서가 아니었거든요.</p>
+
+  <h3>1) 기존 고객과의 가격 형평성</h3>
+  <p>5시까지 5천 원에 사던 빵을 5시 1분에 3,500원에 팔면, 정가로 산 손님은 어떻게 되나요. 손님들이 정시에 안 사고 마감만 기다릴 가능성도 있었어요.</p>
+
+  <h3>2) 브랜드 가치</h3>
+  <p>사장님들은 본인 상품이 <strong>낮은 가격과 함께 공개적으로 노출되는 것</strong>을 부담스러워하셨어요. 기존 서비스들이 랜덤 패키지를 쓴 이유가 여기 있었더라고요.</p>
+
+  <h3>3) 추가 운영 부담</h3>
+  <p>이미 배달·예약으로 플랫폼을 서너 개씩 쓰고 계셨어요. 떠리를 추가하면 매일 상품과 수량을 등록하고 실제 재고와 맞춰야 했죠. <strong>빵 몇 개 더 팔려고 새로운 관리 업무를 떠안는 구조</strong>였어요.</p>
+
+  <h3>4) 기대보다 낮은 경제적 효용</h3>
+  <p>일부 매장은 남는 빵을 직원에게 주거나 기부하고 계셨어요. 이미 처리 방법이 있으니 적은 금액을 벌자고 일을 늘릴 이유가 없었던 거죠.</p>
+  <p>사장님이 원한 건 폐기 비용 절감이 아니었어요. <strong>새로운 손님의 방문과 재구매</strong>였습니다. 결국 공급자가 원한 건 할인 판매 기능이 아니라 실질적인 구매력과 홍보 효과였어요.</p>
+
+  <h2>사용자에게 좋은 게 시장에 좋은 건 아니었어요</h2>
+  <p>여기서 앞의 설문이 돌아왔어요. 개별 상품 선택은 사용자 79%가 선호한 방식이지만, 사장님은 <strong>상품마다 마감할 수량을 매일 등록</strong>해야 했습니다.</p>
+
+  <blockquote class="pull" data-reveal>사용자의 선택권을 늘릴수록<br>공급자의 관리 비용도 함께 늘어난다.</blockquote>
+
+  <p>기존 서비스의 랜덤 패키지는 사용자 경험이 부족한 게 아니라 <strong>공급자의 부담을 줄이려는 구조</strong>였어요. 설문에서 사장님 표본을 확보하지 못한 게 여기서 비용으로 돌아왔습니다.</p>
+
+  <h2>돈을 잘못 벌었어요</h2>
+  <p>6개월 누적 거래액은 <strong>500만 원</strong>이었어요. 월 최대 매출이 200만 원이니 평월은 그 절반에도 못 미쳤다는 뜻이죠. 그리고 최고 매출을 낸 그 달에도 단위 경제성은 무너져 있었습니다.</p>
+
+  <div class="note-panel" data-reveal>
+    <ol>
+      <li>수수료 10% → 월 매출 200만 원에도 수익은 <strong>약 20만 원</strong></li>
+      <li>결제 관련 비용만 월 <strong>30만~35만 원</strong></li>
+      <li>여기에 서버·마케팅·영업·운영 비용이 추가</li>
+      <li><strong>최고 매출을 낸 달에도 적자</strong></li>
+    </ol>
+  </div>
+
+  <p>캠퍼스타운 분기 지원금 500만 원으로 버티는 구조였어요. 그때 구분해야 했던 건 <strong>더 열심히 하면 풀리는 문제인지, 구조적으로 안 되는 문제인지</strong>였습니다.</p>
+
+  <h2>가장 강한 조건으로 마지막 실험을 했어요</h2>
+  <p>방학이 시작되자 구매가 눈에 띄게 줄었어요. 팔리지 않으니 점주는 상품을 올리지 않고, 볼 게 없으니 사용자는 앱을 열지 않고, 사용자가 없으니 점주는 더 소홀해졌죠. 전형적인 악순환이었습니다.</p>
+  <p>그래서 <strong>빵값을 0원으로 만드는 실험</strong>을 설계했어요. 1,900원짜리 일주일 패스를 사면 하루 한 번 빵을 0원에 받아가는 구조였죠.</p>
+
+  <blockquote class="pull" data-reveal>무료로 줘도 사람들이 오지 않는다면,<br>가격은 핵심 문제가 아니다.</blockquote>
+
+
+  <figure class="media" data-reveal>
+    <img src="reference/thurry-zero-flow.png" alt="">
+  </figure>
+
+
+  <div class="note-panel" data-reveal>
+    <ol>
+      <li>패스를 접한 사용자 <strong>약 350명</strong></li>
+      <li>패스 구매 <strong>약 50명</strong> (약 11%)</li>
+      <li>실제로 빵을 픽업 <strong>약 20명</strong> (구매자의 40%)</li>
+      <li>두 번 이상 픽업 <strong>2명</strong> (구매자의 약 4%)</li>
+    </ol>
+  </div>
+
+  <p><strong>돈을 내고 패스를 산 50명 중 30명이 한 번도 오지 않았어요.</strong> 병목은 가격이 아니라 인지도와 이용 습관이었습니다.</p>
+
+  <h2>종료도 제품 결정이었어요</h2>
+  <p>꽃집 등 다른 상품군 확장도 검토했어요. 그런데 <strong>매장을 직접 영업하고 재고를 입력하게 만들고 양쪽 문의를 처리해야 하는 구조</strong>는 그대로였습니다. 여기에 팀원들의 군 입대와 역할 변화도 겹쳤고요.</p>
+  <p>가장 강한 조건에서 핵심 가설이 검증되지 않았고, 더 투입해도 구조가 개선될 가능성이 낮다고 판단했어요. <strong>감정이 아니라 구매·재구매 데이터를 근거로 종료했습니다.</strong></p>
+  <p>다만 솔직하게 덧붙이면, <strong>이 실험을 시작하기 전에 "어느 수준이면 접는다"를 미리 정해두지 않았어요.</strong> 결과를 다 보고 나서 판단한 거죠. 기준선이 없으면 어떤 숫자가 나와도 "조금만 더"를 붙일 수 있다는 걸 그때 알았습니다.</p>
+  <p>지금은 실험을 설계할 때 <strong>성공 기준과 종료 기준을 함께 적고 시작해요.</strong> 회사에서 PoC를 제안할 때도 같은 순서예요.</p>
+
+  <h2>남은 것</h2>
+
+  <ul class="points">
+    <li data-reveal>
+      <strong>설문의 표본이 곧 의사결정의 범위다</strong>
+      사용자 79%는 확보했지만 공급자 데이터 없이 핵심 차별점을 정했고, 그 공백이 입점 전환율로 돌아왔어요. 이후 플랫폼을 볼 때는 공급자의 작업량·기대 수익·전환 비용을 함께 확인해요.
+    </li>
+    <li data-reveal>
+      <strong>성장 지표보다 단위 경제성이 먼저다</strong>
+      거래 한 건이 얼마의 수익과 비용을 만드는지, 규모가 커지면 구조가 나아지는지를 먼저 봅니다.
+    </li>
+    <li data-reveal>
+      <strong>실험 전에 종료 기준을 함께 적는다</strong>
+      떠리에서는 결과를 보고 나서 판단했어요. 기준선이 없으면 어떤 숫자에도 "조금만 더"를 붙일 수 있습니다. 지금은 성공 기준과 종료 기준을 같이 적고 실험을 시작해요.
+    </li>
+  </ul>
+
+
+  <a class="nextup" href="capacity.html">
+    <span><span class="k">다음 트랙</span><span class="v">이 판단, 정말 LLM이 필요할까?</span></span>
+    <svg width="8" height="14" viewBox="0 0 8 14" fill="none"><path d="M1 1l6 6-6 6" stroke="#8b95a1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </a>
+
+</article>
+
+<footer class="container article-foot">
+  <div class="divider"></div>
+  <a href="index.html">← 목록으로 돌아가기</a>
+</footer>
+
+<script>
+document.documentElement.classList.add('js');
+const io=new IntersectionObserver(es=>{
+  es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('is-in');io.unobserve(e.target);}});
+},{threshold:.12});
+document.querySelectorAll('[data-reveal]').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

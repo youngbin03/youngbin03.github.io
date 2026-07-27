@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>모두가 공감하는 문제, 정말 만들어야 할까? — 신영빈</title>
+<meta name="description" content="신영빈 포트폴리오 — 더 나은 정답보다, 더 나은 문제를 찾습니다. 떠리·오늘의 식냥·미리캔버스 AI 프로젝트 기록.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="모두가 공감하는 문제, 정말 만들어야 할까? — 신영빈">
+<meta property="og:description" content="더 나은 정답보다, 더 나은 문제를 찾습니다.">
+<meta property="og:url" content="https://youngbin03.github.io/siknyang.html">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+  :root{
+    --bg:#ffffff;
+    --ink:#191f28;      /* 헤드라인 */
+    --body:#333d4b;     /* 본문 */
+    --sub:#4e5968;      /* 보조 텍스트 */
+    --mute:#8b95a1;     /* 날짜·캡션 */
+    --chip:#f2f4f6;     /* 태그 칩 */
+    --panel:#f7f8fa;    /* 회색 패널 */
+    --accent:#57e58c;
+    --r-panel:24px;
+    --container:720px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    background:var(--bg);color:var(--body);
+    font-family:'Pretendard Variable',Pretendard,system-ui,-apple-system,sans-serif;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  ::selection{background:rgba(87,229,140,.3);}
+  a{color:inherit;text-decoration:none;}
+
+  /* ---------- nav (라이트) ---------- */
+  nav{
+    position:fixed;inset:0 0 auto 0;z-index:100;
+    display:flex;justify-content:space-between;align-items:center;
+    padding:20px 28px;
+    background:rgba(255,255,255,.7);
+    backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  }
+  nav .logo{font-size:15px;font-weight:600;letter-spacing:-.01em;color:var(--ink);}
+  nav .back{font-size:14px;font-weight:600;color:var(--sub);display:flex;align-items:center;gap:6px;}
+  nav .back:hover{color:var(--ink);}
+
+  .container{max-width:var(--container);margin:0 auto;padding:0 24px;}
+
+  /* ---------- article head ---------- */
+  .article-head{padding-top:150px;} /* 좌우 패딩은 .container(24px) 유지 */
+  h1{
+    font-size:clamp(30px,5.4vw,44px);
+    font-weight:700;line-height:1.32;letter-spacing:-.02em;
+    color:var(--ink);
+    word-break:keep-all;
+  }
+  .tags{margin-top:22px;display:flex;gap:8px;flex-wrap:wrap;}
+  .tag{
+    padding:7px 14px;border-radius:8px;
+    background:var(--chip);font-size:14px;font-weight:500;color:var(--sub);
+  }
+  .byline{margin-top:44px;}
+  .byline .who{font-size:16px;font-weight:700;color:var(--ink);}
+  .byline .date{margin-top:6px;font-size:15px;color:var(--mute);}
+
+  /* ---------- body ---------- */
+  .article-body{padding-top:56px;padding-bottom:40px;}
+  .article-body p{font-size:17px;line-height:1.8;letter-spacing:-.005em;}
+  .article-body p + p{margin-top:26px;}
+  .article-body p strong{color:var(--ink);font-weight:700;}
+  h2{
+    margin:72px 0 24px;
+    font-size:28px;font-weight:700;letter-spacing:-.015em;line-height:1.4;
+    color:var(--ink);
+  }
+  h3{
+    margin:52px 0 20px;
+    font-size:22px;font-weight:700;letter-spacing:-.01em;
+    color:var(--ink);
+  }
+
+  /* ---------- media ---------- */
+  .media{
+    margin:48px 0;
+    border-radius:16px;overflow:hidden;
+    background:#050506;
+  }
+  .media video,.media img{width:100%;height:auto;display:block;}
+  .media.panel{background:var(--panel);padding:40px;}
+  .media .caption{padding:14px 4px 0;font-size:14px;color:var(--mute);text-align:center;}
+
+  /* ---------- 회색 패널: 번호 리스트 ---------- */
+  .note-panel{
+    margin:48px 0;
+    background:var(--panel);border-radius:var(--r-panel);
+    padding:48px 44px;
+  }
+  .note-panel ol{list-style:none;counter-reset:n;display:flex;flex-direction:column;gap:24px;}
+  .note-panel li{
+    counter-increment:n;
+    display:flex;gap:14px;
+    font-size:17px;line-height:1.7;color:var(--body);
+  }
+  .note-panel li::before{content:counter(n)".";font-weight:600;color:var(--body);flex-shrink:0;}
+  .note-panel li strong{color:var(--ink);font-weight:700;}
+
+  /* ---------- 불릿 ---------- */
+  .points{margin:32px 0;display:flex;flex-direction:column;gap:28px;list-style:none;}
+  .points li{position:relative;padding-left:22px;font-size:17px;line-height:1.8;}
+  .points li::before{content:"";position:absolute;left:4px;top:13px;width:5px;height:5px;border-radius:50%;background:var(--body);}
+  .points li strong{display:block;color:var(--ink);font-weight:700;margin-bottom:6px;}
+
+  /* ---------- footer ---------- */
+  .article-foot{padding-top:60px;padding-bottom:120px;}
+  .article-foot .divider{height:1px;background:#e8ebee;margin-bottom:40px;}
+  .article-foot a{font-size:16px;font-weight:600;color:var(--sub);display:inline-flex;align-items:center;gap:8px;}
+  .article-foot a:hover{color:var(--ink);}
+
+  /* ---------- mobile (≤640px) ---------- */
+  /* 좌우 여백은 어떤 화면에서도 24px 아래로 내려가지 않음 */
+  @media (max-width:640px){
+    nav{padding:16px 20px;}
+    .article-head{padding-top:116px;}
+    h1{font-size:clamp(25px,7.6vw,30px);line-height:1.38;}
+    .tags{margin-top:18px;}
+    .byline{margin-top:32px;}
+    .article-body{padding-top:44px;padding-bottom:24px;}
+    .article-body p{font-size:16px;line-height:1.75;}
+    .article-body p + p{margin-top:22px;}
+    h2{margin:56px 0 20px;font-size:23px;}
+    h3{margin:40px 0 16px;font-size:19px;}
+    .media{margin:36px 0;border-radius:12px;}
+    .note-panel{margin:36px 0;padding:32px 24px;border-radius:20px;}
+    .note-panel ol{gap:20px;}
+    .note-panel li{font-size:16px;}
+    .points{gap:24px;}
+    .points li{font-size:16px;padding-left:20px;}
+    .article-foot{padding-top:40px;padding-bottom:90px;}
+  }
+
+
+  :root{--container:750px;}
+  /* ---------- pull quote ---------- */
+  blockquote.pull{
+    margin:56px 0;padding-left:20px;
+    border-left:5px solid var(--ink);
+    font-size:22px;font-weight:700;line-height:1.5;letter-spacing:-.015em;
+    color:var(--ink);word-break:keep-all;
+  }
+  /* ---------- metric strip ---------- */
+  .metrics{
+    margin-top:36px;padding:24px 0;
+    border-top:1px solid #e8ebee;border-bottom:1px solid #e8ebee;
+    display:grid;grid-template-columns:repeat(3,1fr);gap:22px 20px;
+  }
+  .metrics > div{text-align:center;}
+  .metrics .k{font-size:13px;color:var(--mute);line-height:1.4;}
+  /* ---------- media: 이미지는 배경 없이, 영상만 레터박스용 다크 ---------- */
+  .media{background:transparent;margin-left:20px;margin-right:20px;}
+  .media.vid{background:#050506;}
+  .metrics .v{margin-top:7px;font-size:20px;font-weight:700;letter-spacing:-.015em;color:var(--ink);line-height:1.3;}
+  /* ---------- note-panel 밀도 ---------- */
+  .note-panel{margin:40px 20px;padding:32px 30px;}
+  .note-panel ol{gap:13px;}
+  .note-panel li{line-height:1.48;word-break:keep-all;word-spacing:-.05em;gap:8px;}
+  .note-panel li strong{letter-spacing:-.015em;margin-right:-1px;}
+  /* ---------- byline role ---------- */
+  .byline .role{margin-top:12px;font-size:15px;color:var(--sub);line-height:1.65;}
+  /* ---------- media placeholder ---------- */
+  .media.ph{
+    background:var(--panel);min-height:240px;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .media.ph span{font-size:14px;color:var(--mute);letter-spacing:-.01em;text-align:center;padding:0 24px;line-height:1.6;}
+  /* ---------- next up ---------- */
+  .nextup{
+    margin-top:64px;padding:28px 32px;
+    background:var(--panel);border-radius:var(--r-panel);
+    display:flex;align-items:center;justify-content:space-between;gap:16px;
+  }
+  .nextup .k{font-size:13px;color:var(--mute);}
+  .nextup .v{display:block;margin-top:6px;font-size:18px;font-weight:700;color:var(--ink);letter-spacing:-.01em;}
+  .nextup:hover .v{color:var(--sub);}
+  @media (max-width:640px){
+    blockquote.pull{margin:40px 0;font-size:18px;padding-left:16px;border-left-width:4px;}
+    .metrics{grid-template-columns:repeat(2,1fr);}
+    .media{margin-left:0;margin-right:0;}
+    .note-panel{margin:32px 0;padding:26px 22px;}
+    .note-panel ol{gap:12px;}
+    .metrics .v{font-size:18px;}
+    .nextup{padding:22px 20px;flex-direction:column;align-items:flex-start;}
+  }
+
+  /* ---------- reveal ---------- */
+  html.js [data-reveal]{opacity:0;transform:translateY(24px);}
+  html.js [data-reveal].is-in{
+    opacity:1;transform:none;
+    transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1);
+  }
+  @media (prefers-reduced-motion:reduce){
+    html.js [data-reveal]{opacity:1;transform:none;transition:none;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="index.html">신영빈</a>
+  <a class="back" href="index.html">← 돌아가기</a>
+</nav>
+
+<header class="container article-head">
+  <h1>모두가 공감하는 문제,<br>정말 만들어야 할까?</h1>
+  <div class="tags"><span class="tag">#문제정의</span><span class="tag">#안정성</span><span class="tag">#3인팀</span></div>
+  <div class="byline">
+    <div class="date">2024.02 – 2024.09</div>
+    <div class="role">기획 · UI/UX 디자인 · 클라이언트 개발 · 홍보 역할</div>
+  </div>
+  <div class="metrics">
+    <div><div class="k">누적 이용자</div><div class="v">2,500명</div></div>
+    <div><div class="k">에브리타임 스크랩</div><div class="v">약 800회</div></div>
+    <div><div class="k">App Store 음식·음료</div><div class="v">30위</div></div>
+  </div>
+</header>
+
+<article class="container article-body">
+  <p>안녕하세요!</p>
+  <p>한양대학교 학식 앱, <strong>오늘의 식냥</strong> 이야기예요. 첫 제품에서 <strong>문제를 고르는 기준</strong>과 <strong>통제할 수 없는 데이터를 다루는 법</strong>을 배웠어요.</p>
+
+  <figure class="media" data-reveal>
+    <img src="reference/siknyang-launch.png" alt="">
+  </figure>
+
+
+  <h2>강도 대신 빈도를 골랐어요</h2>
+  <p>후보는 두 개였어요. <strong>교내 길 찾기</strong>와 <strong>학식 메뉴 확인</strong>.</p>
+  <p>학생 인터뷰에선 길 찾기 쪽 반응이 훨씬 좋았어요. 강의실을 못 찾아 헤맨 기억은 누구나 있으니까요. 그런데 실제 사용 상황을 그려보다 이상한 지점을 발견했어요. 신입생도 <strong>2주면</strong> 건물 위치를 익히더라고요. 문제의 강도는 센데 겪는 기간이 학기 초 몇 주뿐이었던 거죠.</p>
+  <p>학식은 달랐어요. 식당마다 홈페이지가 달라서 메뉴를 확인하려면 여러 페이지를 돌아야 했고, <strong>하루 두세 번, 학기 내내</strong> 반복됐어요.</p>
+
+  <blockquote class="pull" data-reveal>‘이 문제는 얼마나 자주, 오랫동안 반복될까?’</blockquote>
+
+  <p>저희는 공감대가 큰 문제 대신 반복되는 문제를 골랐어요. 그때는 감이었는데, 지금도 문제의 중요도를 판단하는 기준이 되었죠.</p>
+
+  <h2>통제할 수 없는 데이터를 다루는 법</h2>
+  <p>출시 후 가장 큰 문제는 <strong>메뉴 사진이 자주 비어 있다</strong>는 거였어요. 영양사 선생님이 정해진 시간에 올리시는 게 아니었거든요. 사용자는 먹기 전에 확인하려고 앱을 켜는데, 정작 그 시간에 메뉴 사진이 없던 거죠.</p>
+  <p>이미지가 비면 화면 전체의 매력도가 급격히 떨어져요. 그러나 사진의 등록 시간은 통제할 수 없었어요. 대신 <strong>메뉴가 한 달 주기로 반복된다</strong>는 점을 봤어요.</p>
+  <p>스케줄러·스크래핑·히스토리 DB로 데이터를 상시 수집해두고, <strong>메뉴명을 정규화해 과거 유사 메뉴 사진을 찾아 대체 노출</strong>했어요. 최신 사진을 대체하진 못하지만 빈 화면보다는 훨씬 나은 사용자 경험을 제공할 수 있었죠.</p>
+
+  <figure class="media" data-reveal>
+    <img src="reference/siknyang-fallback.png" alt="">
+  </figure>
+
+  <p>통제할 수 없는 데이터가 있다면 완벽한 해결을 기다리기보다 <strong>불확실성을 줄이는 대안</strong>을 내는 법을 배울 수 있었어요.</p>
+
+  <h2>광고 대신 저장할 만한 콘텐츠</h2>
+  <p>광고 예산이 없어서 <strong>학생들이 이미 모여 있는 채널</strong>만 골랐어요.</p>
+  <p>축제기획단 활동을 하며 알게 된 한대신문 관계자에게 직접 연락해 교내 매체에 실렸어요. 에브리타임에는 앱 홍보 대신 <strong>‘한양대 생활 꿀팁’</strong> 콘텐츠를 만들고 그 안에 앱을 추천 중 하나로 끼워 넣었고요. 그 게시물이 <strong>스크랩 약 800회</strong>를 기록하며 유입의 대부분을 만들었습니다.</p>
+  <p>이후로는 만드는 단계에서부터 유저가 우리 서비스를 <strong>어떤 경로로 접하게 될지</strong>를 같이 설계하게 됐어요.</p>
+
+  <h2>남은 것</h2>
+  <p>3년 뒤 학교가 공식 학식 인터페이스를 제공하면서 역할을 마쳤어요.</p>
+  <p>유지되지 못한 걸 실패로 보진 않아요. 저희가 찾은 문제가 실제로 존재했고, <strong>학교가 공식적으로 같은 문제를 해결했다는 게 문제 선택이 옳았다는 증거</strong>이기도 하니까요.</p>
+
+  <a class="nextup" href="thurry-build.html">
+    <span><span class="k">다음 글</span><span class="v">완성된 제품 없이 수요를 증명할 수 있을까?</span></span>
+    <svg width="8" height="14" viewBox="0 0 8 14" fill="none"><path d="M1 1l6 6-6 6" stroke="#8b95a1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </a>
+
+</article>
+
+<footer class="container article-foot">
+  <div class="divider"></div>
+  <a href="index.html">← 목록으로 돌아가기</a>
+</footer>
+
+<script>
+document.documentElement.classList.add('js');
+const io=new IntersectionObserver(es=>{
+  es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('is-in');io.unobserve(e.target);}});
+},{threshold:.12});
+document.querySelectorAll('[data-reveal]').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

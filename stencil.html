@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI에게 자유를 주면 더 창의적일까? — 신영빈</title>
+<meta name="description" content="신영빈 포트폴리오 — 더 나은 정답보다, 더 나은 문제를 찾습니다. 떠리·오늘의 식냥·미리캔버스 AI 프로젝트 기록.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="AI에게 자유를 주면 더 창의적일까? — 신영빈">
+<meta property="og:description" content="더 나은 정답보다, 더 나은 문제를 찾습니다.">
+<meta property="og:url" content="https://youngbin03.github.io/stencil.html">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+  :root{
+    --bg:#ffffff;
+    --ink:#191f28;      /* 헤드라인 */
+    --body:#333d4b;     /* 본문 */
+    --sub:#4e5968;      /* 보조 텍스트 */
+    --mute:#8b95a1;     /* 날짜·캡션 */
+    --chip:#f2f4f6;     /* 태그 칩 */
+    --panel:#f7f8fa;    /* 회색 패널 */
+    --accent:#4b9bff;
+    --r-panel:24px;
+    --container:720px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    background:var(--bg);color:var(--body);
+    font-family:'Pretendard Variable',Pretendard,system-ui,-apple-system,sans-serif;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  ::selection{background:rgba(75,155,255,.3);}
+  a{color:inherit;text-decoration:none;}
+
+  /* ---------- nav (라이트) ---------- */
+  nav{
+    position:fixed;inset:0 0 auto 0;z-index:100;
+    display:flex;justify-content:space-between;align-items:center;
+    padding:20px 28px;
+    background:rgba(255,255,255,.7);
+    backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  }
+  nav .logo{font-size:15px;font-weight:600;letter-spacing:-.01em;color:var(--ink);}
+  nav .back{font-size:14px;font-weight:600;color:var(--sub);display:flex;align-items:center;gap:6px;}
+  nav .back:hover{color:var(--ink);}
+
+  .container{max-width:var(--container);margin:0 auto;padding:0 24px;}
+
+  /* ---------- article head ---------- */
+  .article-head{padding-top:150px;} /* 좌우 패딩은 .container(24px) 유지 */
+  h1{
+    font-size:clamp(30px,5.4vw,44px);
+    font-weight:700;line-height:1.32;letter-spacing:-.02em;
+    color:var(--ink);
+    word-break:keep-all;
+  }
+  .tags{margin-top:22px;display:flex;gap:8px;flex-wrap:wrap;}
+  .tag{
+    padding:7px 14px;border-radius:8px;
+    background:var(--chip);font-size:14px;font-weight:500;color:var(--sub);
+  }
+  .byline{margin-top:44px;}
+  .byline .who{font-size:16px;font-weight:700;color:var(--ink);}
+  .byline .date{margin-top:6px;font-size:15px;color:var(--mute);}
+
+  /* ---------- body ---------- */
+  .article-body{padding-top:56px;padding-bottom:40px;}
+  .article-body p{font-size:17px;line-height:1.8;letter-spacing:-.005em;}
+  .article-body p + p{margin-top:26px;}
+  .article-body p strong{color:var(--ink);font-weight:700;}
+  h2{
+    margin:72px 0 24px;
+    font-size:28px;font-weight:700;letter-spacing:-.015em;line-height:1.4;
+    color:var(--ink);
+  }
+  h3{
+    margin:52px 0 20px;
+    font-size:22px;font-weight:700;letter-spacing:-.01em;
+    color:var(--ink);
+  }
+
+  /* ---------- media ---------- */
+  .media{
+    margin:48px 0;
+    border-radius:16px;overflow:hidden;
+    background:#050506;
+  }
+  .media video,.media img{width:100%;height:auto;display:block;}
+  .media.panel{background:var(--panel);padding:40px;}
+  .media .caption{padding:14px 4px 0;font-size:14px;color:var(--mute);text-align:center;}
+
+  /* ---------- 회색 패널: 번호 리스트 ---------- */
+  .note-panel{
+    margin:48px 0;
+    background:var(--panel);border-radius:var(--r-panel);
+    padding:48px 44px;
+  }
+  .note-panel ol{list-style:none;counter-reset:n;display:flex;flex-direction:column;gap:24px;}
+  .note-panel li{
+    counter-increment:n;
+    display:flex;gap:14px;
+    font-size:17px;line-height:1.7;color:var(--body);
+  }
+  .note-panel li::before{content:counter(n)".";font-weight:600;color:var(--body);flex-shrink:0;}
+  .note-panel li strong{color:var(--ink);font-weight:700;}
+
+  /* ---------- 불릿 ---------- */
+  .points{margin:32px 0;display:flex;flex-direction:column;gap:28px;list-style:none;}
+  .points li{position:relative;padding-left:22px;font-size:17px;line-height:1.8;}
+  .points li::before{content:"";position:absolute;left:4px;top:13px;width:5px;height:5px;border-radius:50%;background:var(--body);}
+  .points li strong{display:block;color:var(--ink);font-weight:700;margin-bottom:6px;}
+
+  /* ---------- footer ---------- */
+  .article-foot{padding-top:60px;padding-bottom:120px;}
+  .article-foot .divider{height:1px;background:#e8ebee;margin-bottom:40px;}
+  .article-foot a{font-size:16px;font-weight:600;color:var(--sub);display:inline-flex;align-items:center;gap:8px;}
+  .article-foot a:hover{color:var(--ink);}
+
+  /* ---------- mobile (≤640px) ---------- */
+  /* 좌우 여백은 어떤 화면에서도 24px 아래로 내려가지 않음 */
+  @media (max-width:640px){
+    nav{padding:16px 20px;}
+    .article-head{padding-top:116px;}
+    h1{font-size:clamp(25px,7.6vw,30px);line-height:1.38;}
+    .tags{margin-top:18px;}
+    .byline{margin-top:32px;}
+    .article-body{padding-top:44px;padding-bottom:24px;}
+    .article-body p{font-size:16px;line-height:1.75;}
+    .article-body p + p{margin-top:22px;}
+    h2{margin:56px 0 20px;font-size:23px;}
+    h3{margin:40px 0 16px;font-size:19px;}
+    .media{margin:36px 0;border-radius:12px;}
+    .note-panel{margin:36px 0;padding:32px 24px;border-radius:20px;}
+    .note-panel ol{gap:20px;}
+    .note-panel li{font-size:16px;}
+    .points{gap:24px;}
+    .points li{font-size:16px;padding-left:20px;}
+    .article-foot{padding-top:40px;padding-bottom:90px;}
+  }
+
+
+  :root{--container:750px;}
+  /* ---------- pull quote ---------- */
+  blockquote.pull{
+    margin:56px 0;padding-left:20px;
+    border-left:5px solid var(--ink);
+    font-size:22px;font-weight:700;line-height:1.5;letter-spacing:-.015em;
+    color:var(--ink);word-break:keep-all;
+  }
+  /* ---------- metric strip ---------- */
+  .metrics{
+    margin-top:36px;padding:24px 0;
+    border-top:1px solid #e8ebee;border-bottom:1px solid #e8ebee;
+    display:grid;grid-template-columns:repeat(3,1fr);gap:22px 20px;
+  }
+  .metrics > div{text-align:center;}
+  .metrics .k{font-size:13px;color:var(--mute);line-height:1.4;}
+  /* ---------- media: 이미지는 배경 없이, 영상만 레터박스용 다크 ---------- */
+  .media{background:transparent;margin-left:20px;margin-right:20px;}
+  .media.vid{background:#050506;}
+  .metrics .v{margin-top:7px;font-size:20px;font-weight:700;letter-spacing:-.015em;color:var(--ink);line-height:1.3;}
+  /* ---------- note-panel 밀도 ---------- */
+  .note-panel{margin:40px 20px;padding:32px 30px;}
+  .note-panel ol{gap:13px;}
+  .note-panel li{line-height:1.48;word-break:keep-all;word-spacing:-.05em;gap:8px;}
+  .note-panel li strong{letter-spacing:-.015em;margin-right:-1px;}
+  /* ---------- byline role ---------- */
+  .byline .role{margin-top:12px;font-size:15px;color:var(--sub);line-height:1.65;}
+  /* ---------- media placeholder ---------- */
+  .media.ph{
+    background:var(--panel);min-height:240px;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .media.ph span{font-size:14px;color:var(--mute);letter-spacing:-.01em;text-align:center;padding:0 24px;line-height:1.6;}
+  /* ---------- next up ---------- */
+  .nextup{
+    margin-top:64px;padding:28px 32px;
+    background:var(--panel);border-radius:var(--r-panel);
+    display:flex;align-items:center;justify-content:space-between;gap:16px;
+  }
+  .nextup .k{font-size:13px;color:var(--mute);}
+  .nextup .v{display:block;margin-top:6px;font-size:18px;font-weight:700;color:var(--ink);letter-spacing:-.01em;}
+  .nextup:hover .v{color:var(--sub);}
+  @media (max-width:640px){
+    blockquote.pull{margin:40px 0;font-size:18px;padding-left:16px;border-left-width:4px;}
+    .metrics{grid-template-columns:repeat(2,1fr);}
+    .media{margin-left:0;margin-right:0;}
+    .note-panel{margin:32px 0;padding:26px 22px;}
+    .note-panel ol{gap:12px;}
+    .metrics .v{font-size:18px;}
+    .nextup{padding:22px 20px;flex-direction:column;align-items:flex-start;}
+  }
+
+  /* ---------- reveal ---------- */
+  html.js [data-reveal]{opacity:0;transform:translateY(24px);}
+  html.js [data-reveal].is-in{
+    opacity:1;transform:none;
+    transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1);
+  }
+  @media (prefers-reduced-motion:reduce){
+    html.js [data-reveal]{opacity:1;transform:none;transition:none;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="index.html">신영빈</a>
+  <a class="back" href="index.html">← 돌아가기</a>
+</nav>
+
+<header class="container article-head">
+  <h1>AI에게 자유를 주면<br>더 창의적일까?</h1>
+  <div class="tags"><span class="tag">#생성제약</span><span class="tag">#디자인시스템</span><span class="tag">#개인프로젝트</span></div>
+  <div class="byline">
+    <div class="date">2026</div>
+    <div class="role">개인 프로젝트 · Anthropic SDK · TypeScript</div>
+  </div>
+  <div class="metrics">
+    <div><div class="k">품질 지표 자동 채점</div><div class="v">7개</div></div>
+    <div><div class="k">목업 인식률</div><div class="v">0 → 5개</div></div>
+    <div><div class="k">최소 글자 하한</div><div class="v">12 → 18px</div></div>
+  </div>
+</header>
+
+<article class="container article-body">
+  <p>안녕하세요!</p>
+  <p>미리캔버스 AI 팀 인턴 지원을 준비하며 혼자 만든 프로젝트, <strong>Stencil</strong>을 소개하려고 해요.</p>
+  <p>출발 질문은 하나였어요. <strong>"좋은 템플릿의 감각을, 코드가 재사용할 수 있는 규칙으로 바꿀 수 있을까?"</strong> 결론부터 말하면 AI에게 자유를 줄수록 결과가 나빠졌어요.</p>
+
+  <figure class="media ph" data-reveal>
+    <span>TODO — 입력 템플릿 한 벌<br>여기서 색·폰트·간격·레이아웃 규칙을 추출</span>
+  </figure>
+
+
+  <h2>문제는 생성 능력이 아니었어요</h2>
+  <p>지원을 준비하며 AI 프레젠테이션 서비스를 전부 써봤어요. 낱장은 그럭저럭인데 <strong>열 장을 이어 붙이면 같은 문서로 보이지 않았어요.</strong> 요소가 겹치고 어긋나고, 품질도 매번 달랐고요.</p>
+  <p>처음엔 모델 성능 문제로 봤는데, 뜯어볼수록 다른 결론에 닿았어요.</p>
+
+  <blockquote class="pull" data-reveal>문제는 AI의 생성 능력이 아니라,<br>생성할 수 있는 디자인의 범위가 정의되지 않은 것 아닐까?</blockquote>
+
+  <p>원칙을 한 문장으로 못 박았어요. <strong>"AI는 의미를 판단하고, 위치·크기 계산은 코드가 책임진다."</strong></p>
+
+  <h2>규칙을 굽고, 규칙으로 찍었어요</h2>
+  <p>파이프라인은 두 단계로 나눴어요. 테마당 한 번 도는 <strong>BAKE</strong>와, 요청마다 도는 <strong>STAMP</strong>예요.</p>
+
+  <h3>1) BAKE — 템플릿 분석</h3>
+  <p>템플릿을 한 번 분석해 <strong>색 팔레트 · 글자 크기 체계 · 격자 · 레이아웃 골격</strong>을 하나의 규칙 묶음으로 정리해요. 원본을 복사·붙여넣기 하지 않고, 이후에는 <strong>추출한 규칙만 재사용</strong>합니다.</p>
+
+  <h3>2) STAMP — 슬라이드 생성</h3>
+  <p>요청이 오면 그 규칙만으로 좌표를 새로 계산해요. AI는 "KPI 3개니까 3열 카드"처럼 <strong>레이아웃 의미만 고르고</strong>, 실제 위치·크기·정렬은 코드가 격자와 실측값으로 계산합니다. AI가 좌표·색·크기를 직접 결정하지 못하도록 <strong>출력 구조 자체를 제한</strong>했어요.</p>
+
+  <h3>3) 품질 자동 채점</h3>
+  <p>만든 슬라이드를 <strong>7개 지표</strong>로 자동 채점하고, 동시에 원본 템플릿과 얼마나 다른지도 점수로 매겨요. 지나치게 유사하거나 기준에 미달한 결과는 자동으로 수정하거나 폐기합니다.</p>
+
+  <h2>자유도를 줄여서 품질을 얻었어요</h2>
+  <p>가장 크게 망가진 건 <strong>배경 장식</strong>이었어요. 화면을 채워야 자연스러운 장식을 작게 줄여 모서리에 처박거나, 구석용 작은 장식을 화면 절반만 하게 키웠죠. <strong>큰 장식을 가져와 구석 장식의 문법으로 배치</strong>한 거예요.</p>
+  <p>배치 규칙을 아무리 정교하게 써도 같은 실패가 반복됐어요. 장식은 <strong>에셋 자체보다 원래 쓰인 크기와 위치의 관계</strong>가 중요했거든요.</p>
+  <p>결국 <strong>자유로운 변형을 포기했어요.</strong> 원본의 크기·위치는 고정하고 AI는 조합을 고르거나 색만 바꾸게 했습니다. 생성 자유도는 줄었지만 <strong>실패 가능성과 품질 편차가 크게 낮아졌어요.</strong></p>
+
+  <figure class="media ph" data-reveal>
+    <span>TODO — 같은 내용을 서로 다른 규칙으로 생성한 결과<br>어두운 테마 KPI 3열 / 컬러 테마 타임라인</span>
+  </figure>
+
+
+  <h2>잘 만드는 것보다, 망가지지 않게</h2>
+  <p>품질 하한은 코드가 강제하게 했어요.</p>
+
+  <div class="note-panel" data-reveal>
+    <ol>
+      <li>안전 여백 <strong>≥ 5%</strong></li>
+      <li>최소 글자 크기 <strong>약 18px</strong></li>
+      <li>핵심 글자 크기 <strong>약 54px</strong></li>
+      <li>요소 간 겹침 <strong>0</strong></li>
+    </ol>
+  </div>
+
+  <p>이 값들은 처음부터 정한 게 아니라 <strong>실패를 보고 거꾸로 다듬은 것</strong>이에요. 안 읽히는 글씨를 보고 최소 크기를 <strong>12px에서 18px로</strong> 올렸고, 목업 안의 빈 화면을 못 찾던 문제는 이름표 없는 도형을 상위 그룹으로 되짚게 고쳐 <strong>인식률을 0개에서 5개로</strong> 끌어올렸습니다.</p>
+
+  <h2>AI 평가는 아직 못 믿었어요</h2>
+  <p>렌더링된 슬라이드를 AI가 채점하게 하는 것도 실험했어요. 그런데 <strong>사람이 보기엔 완성도가 낮은 결과를 AI가 높게 평가하는 경우</strong>가 반복됐어요.</p>
+  <p>겹침·정렬·여백처럼 명확한 오류는 규칙으로 잡히지만, 템플릿 특유의 분위기와 완성도는 점수 하나로 판별되지 않았어요. <strong>좋은 결과를 생성하는 문제와 판별하는 문제는 서로 다른 난제예요.</strong></p>
+  <p>모델 성능을 올리기 전에 <strong>실패 조건을 먼저 정의하고, 결정론적 규칙과 AI 평가의 담당 영역을 나눠야</strong> 한다는 결론을 얻었습니다.</p>
+  <p>그래서 남은 문장은 이거예요. <strong>AI 디자인 제품의 품질은 생성 자유도가 아니라, 무엇을 고정하고 무엇만 변화시킬지 결정하는 시스템 설계에서 나온다.</strong></p>
+  <p>여기서 못 푼 배경 장식 문제는, 인턴 합류 후 다음 프로젝트에서 다시 다루게 됩니다.</p>
+
+  <a class="nextup" href="bg-composer.html">
+    <span><span class="k">이어지는 글</span><span class="v">새로 만드는 대신, 찾아서 쓰면 안 될까?</span></span>
+    <svg width="8" height="14" viewBox="0 0 8 14" fill="none"><path d="M1 1l6 6-6 6" stroke="#8b95a1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </a>
+
+</article>
+
+<footer class="container article-foot">
+  <div class="divider"></div>
+  <a href="index.html">← 목록으로 돌아가기</a>
+</footer>
+
+<script>
+document.documentElement.classList.add('js');
+const io=new IntersectionObserver(es=>{
+  es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('is-in');io.unobserve(e.target);}});
+},{threshold:.12});
+document.querySelectorAll('[data-reveal]').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
