@@ -4,6 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AI에게 자유를 주면 더 창의적일까? — 신영빈</title>
+<meta name="description" content="신영빈 포트폴리오 — 더 나은 정답보다, 더 나은 문제를 찾습니다.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="AI에게 자유를 주면 더 창의적일까? — 신영빈">
+<meta property="og:description" content="더 나은 정답보다, 더 나은 문제를 찾습니다.">
+<meta property="og:url" content="https://youngbin03.github.io/stencil.html">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <style>
   :root{
@@ -197,6 +203,10 @@
     .nextup .v{font-size:16px;}
   }
 
+  /* ---------- 본문 인라인 링크 ---------- */
+  .article-body p a{color:var(--accent);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px;}
+  .article-body p a:hover{text-decoration-thickness:2px;}
+
   /* ---------- reveal ---------- */
   html.js [data-reveal]{opacity:0;transform:translateY(24px);}
   html.js [data-reveal].is-in{
@@ -219,20 +229,14 @@
   <h1>AI에게 자유를 주면<br>더 창의적일까?</h1>
   <div class="tags"><span class="tag">#생성제약</span><span class="tag">#디자인시스템</span><span class="tag">#개인프로젝트</span></div>
   <div class="byline">
-    <div class="date">2026</div>
-    <div class="role">개인 프로젝트 · Anthropic SDK · TypeScript</div>
-  </div>
-  <div class="metrics">
-    <div><div class="k">품질 지표 자동 채점</div><div class="v">7개</div></div>
-    <div><div class="k">목업 인식률</div><div class="v">0 → 5개</div></div>
-    <div><div class="k">최소 글자 하한</div><div class="v">12 → 18px</div></div>
+    <div class="date">2026.06</div>
+    <div class="role">Stencil · 개인 프로젝트 · Anthropic SDK · TypeScript</div>
   </div>
 </header>
 
 <article class="container article-body">
-  <p>안녕하세요!</p>
-  <p>미리캔버스 AI 팀 인턴 지원을 준비하며 혼자 만든 프로젝트, <strong>Stencil</strong>을 소개하려고 해요.</p>
-  <p>출발 질문은 하나였어요. <strong>"좋은 템플릿의 감각을, 코드가 재사용할 수 있는 규칙으로 바꿀 수 있을까?"</strong> 결론부터 말하면 AI에게 자유를 줄수록 결과가 나빠졌어요.</p>
+  <p>미리캔버스 AI 팀 인턴 지원을 준비하며 혼자 만든 프로젝트예요. 시작은 질문 하나였어요. <strong>"좋은 템플릿의 감각을, 코드가 재사용할 수 있는 규칙으로 바꿀 수 있을까?"</strong></p>
+  <p>결론부터 말하면 <strong>AI가 결정할 범위를 정하는 일</strong>이었어요.</p>
 
   <figure class="media ph" data-reveal>
     <span>TODO — 입력 템플릿 한 벌<br>여기서 색·폰트·간격·레이아웃 규칙을 추출</span>
@@ -240,24 +244,24 @@
 
 
   <h2>문제는 생성 능력이 아니었어요</h2>
-  <p>지원을 준비하며 AI 프레젠테이션 서비스를 전부 써봤어요. 낱장은 그럭저럭인데 <strong>열 장을 이어 붙이면 같은 문서로 보이지 않았어요.</strong> 요소가 겹치고 어긋나고, 품질도 매번 달랐고요.</p>
+  <p>지원을 준비하면서 AI 프레젠테이션 서비스를 여러 개 써봤어요. 그런데 결과가 생각만큼 잘 나오지 않았어요. <strong>템플릿이 허용하는 범위 안에서만 만들어지고, 페이지 단위로 고치는 건 자유롭지 않았거든요.</strong></p>
   <p>처음엔 모델 성능 문제로 봤는데, 뜯어볼수록 다른 결론에 닿았어요.</p>
 
   <blockquote class="pull" data-reveal>문제는 AI의 생성 능력이 아니라,<br>생성할 수 있는 디자인의 범위가 정의되지 않은 것 아닐까?</blockquote>
 
-  <p>원칙을 한 문장으로 못 박았어요. <strong>"AI는 의미를 판단하고, 위치·크기 계산은 코드가 책임진다."</strong></p>
+  <p>그래서 프로젝트를 진행하며 원칙 하나를 세우게 됐어요. <strong>"AI는 의미를 판단하고, 배치는 코드가 수행한다."</strong></p>
 
   <h2>규칙을 굽고, 규칙으로 찍었어요</h2>
   <p>파이프라인은 두 단계로 나눴어요. 테마당 한 번 도는 <strong>BAKE</strong>와, 요청마다 도는 <strong>STAMP</strong>예요.</p>
 
   <h3>1) BAKE — 템플릿 분석</h3>
-  <p>템플릿을 한 번 분석해 <strong>색 팔레트 · 글자 크기 체계 · 격자 · 레이아웃 골격</strong>을 하나의 규칙 묶음으로 정리해요. 원본을 복사·붙여넣기 하지 않고, 이후에는 <strong>추출한 규칙만 재사용</strong>합니다.</p>
+  <p>템플릿을 한 번 분석해 <strong>색 팔레트 · 글자 크기 체계 · 격자 · 레이아웃 골격</strong>을 하나의 규칙 묶음으로 정리해요. 원본을 복사·붙여넣기 하지 않고, 이후에는 <strong>추출한 규칙만 재사용해요.</strong></p>
 
   <h3>2) STAMP — 슬라이드 생성</h3>
-  <p>요청이 오면 그 규칙만으로 좌표를 새로 계산해요. AI는 "KPI 3개니까 3열 카드"처럼 <strong>레이아웃 의미만 고르고</strong>, 실제 위치·크기·정렬은 코드가 격자와 실측값으로 계산합니다. AI가 좌표·색·크기를 직접 결정하지 못하도록 <strong>출력 구조 자체를 제한</strong>했어요.</p>
+  <p>요청이 오면 그 규칙만으로 좌표를 새로 계산해요. AI는 "KPI 3개니까 3열 카드"처럼 <strong>레이아웃 의미만 고르고</strong>, 실제 위치·크기·정렬은 코드가 격자와 실측값으로 계산하도록 했어요. AI가 좌표·색·크기를 직접 결정하지 못하도록 <strong>출력 구조 자체를 제한</strong>했어요.</p>
 
   <h3>3) 품질 자동 채점</h3>
-  <p>만든 슬라이드를 <strong>7개 지표</strong>로 자동 채점하고, 동시에 원본 템플릿과 얼마나 다른지도 점수로 매겨요. 지나치게 유사하거나 기준에 미달한 결과는 자동으로 수정하거나 폐기합니다.</p>
+  <p>만든 슬라이드를 <strong>7개 지표</strong>로 자동 채점하고, 동시에 원본 템플릿과 얼마나 다른지도 점수로 매겨요. 지나치게 유사하거나, 기준에 미달한 결과는 자동으로 수정하거나 폐기하도록 했어요.</p>
 
   <h2>자유도를 줄여서 품질을 얻었어요</h2>
   <p>가장 크게 망가진 건 <strong>배경 장식</strong>이었어요. 화면을 채워야 자연스러운 장식을 작게 줄여 모서리에 처박거나, 구석용 작은 장식을 화면 절반만 하게 키웠죠. <strong>큰 장식을 가져와 구석 장식의 문법으로 배치</strong>한 거예요.</p>
@@ -281,14 +285,13 @@
     </ol>
   </div>
 
-  <p>이 값들은 처음부터 정한 게 아니라 <strong>실패를 보고 거꾸로 다듬은 것</strong>이에요. 안 읽히는 글씨를 보고 최소 크기를 <strong>12px에서 18px로</strong> 올렸고, 목업 안의 빈 화면을 못 찾던 문제는 이름표 없는 도형을 상위 그룹으로 되짚게 고쳐 <strong>인식률을 0개에서 5개로</strong> 끌어올렸습니다.</p>
+  <p>이 값들은 처음부터 정한 게 아니라 <strong>실패를 보고 거꾸로 다듬은 것</strong>이에요. 화면에서 안 읽히는 글씨를 발견할 때마다 최소 크기를 올렸고, 그 결과 하한이 <strong>12px에서 18px로</strong> 바뀌었어요. 규칙이 먼저가 아니라 실패가 먼저였죠.</p>
 
   <h2>AI 평가는 아직 못 믿었어요</h2>
-  <p>렌더링된 슬라이드를 AI가 채점하게 하는 것도 실험했어요. 그런데 <strong>사람이 보기엔 완성도가 낮은 결과를 AI가 높게 평가하는 경우</strong>가 반복됐어요.</p>
-  <p>겹침·정렬·여백처럼 명확한 오류는 규칙으로 잡히지만, 템플릿 특유의 분위기와 완성도는 점수 하나로 판별되지 않았어요. <strong>좋은 결과를 생성하는 문제와 판별하는 문제는 서로 다른 난제예요.</strong></p>
-  <p>모델 성능을 올리기 전에 <strong>실패 조건을 먼저 정의하고, 결정론적 규칙과 AI 평가의 담당 영역을 나눠야</strong> 한다는 결론을 얻었습니다.</p>
-  <p>그래서 남은 문장은 이거예요. <strong>AI 디자인 제품의 품질은 생성 자유도가 아니라, 무엇을 고정하고 무엇만 변화시킬지 결정하는 시스템 설계에서 나온다.</strong></p>
-  <p>여기서 못 푼 배경 장식 문제는, 인턴 합류 후 다음 프로젝트에서 다시 다루게 됩니다.</p>
+  <p>렌더링된 슬라이드를 AI가 채점하게 하는 것도 실험했어요. 그런데 <strong>사람이 보기엔 엉성한 결과를 AI가 높게 평가하는 경우</strong>가 반복됐어요.</p>
+  <p>겹침·정렬·여백 같은 명확한 오류는 규칙으로 잡히는데, 디자인의 의도와 문법은 점수로 판별되지 않았어요. <strong>잘 만드는 문제와 잘 골라내는 문제는 서로 다른 난제였죠.</strong></p>
+  <p>자료를 찾아보며 Anthropic의 <a href="https://claude.com/blog/improving-frontend-design-through-skills" target="_blank" rel="noopener">프론트엔드 디자인 관련 글</a>을 읽고 같은 지점을 확인했어요. 모델은 지시가 없으면 <strong>학습 분포의 가장 안전한 중앙값</strong>으로 수렴해요. 그래서 품질을 올리는 방법은 자유를 더 주는 게 아니라 <strong>판단할 축을 나눠주고, 피할 것과 택할 것을 지정하는 것</strong>이었어요. 제가 규칙을 좁혔을 때 결과가 좋아진 이유도 같았죠. 자유를 뺀 게 아니라 판단할 축을 정해준 거였어요.</p>
+  <p>그래서 남은 문장은 이거예요. <strong>AI 제품의 품질은 모델이 무엇을 할 수 있느냐가 아니라, 무엇을 하지 않게 만들었느냐에서 갈려요.</strong> 자유도는 프롬프트 한 줄로 늘지만, 품질의 하한은 설계해야만 생기거든요. 그래서 지금은 AI 기능을 볼 때 <strong>"무엇을 더 잘 만들까"보다 "무엇을 지켜야 하나"를 먼저 정해요.</strong> 고정할 것이 정해지는 순간, 나머지를 AI에게 맡길 수 있으니까요.</p>
 
   <a class="nextup" href="bg-composer.html">
     <span><span class="k">이어지는 글</span><span class="v">새로 만드는 대신, 찾아서 쓰면 안 될까?</span></span>

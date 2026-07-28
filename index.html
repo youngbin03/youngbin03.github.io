@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>신영빈 — Product Builder</title>
-<meta name="description" content="신영빈 포트폴리오 — 더 나은 정답보다, 더 나은 문제를 찾습니다. 떠리·오늘의 식냥·미리캔버스 AI 프로젝트 기록.">
+<meta name="description" content="신영빈 포트폴리오 — 더 나은 정답보다, 더 나은 문제를 찾습니다.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="신영빈 — Product Builder">
 <meta property="og:description" content="더 나은 정답보다, 더 나은 문제를 찾습니다.">
@@ -13,22 +13,22 @@
 <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <style>
   :root{
-    --bg:#050506;
-    --surface:#141517;
-    --surface-2:#1c1d20;
-    --text:#ffffff;
-    --text-2:rgba(255,255,255,.64);
-    --text-3:rgba(255,255,255,.4);
-    --track1:#57e58c;
-    --track2:#4b9bff;
-    --track3:#b39bff;
-    --r-card:28px;
-    --r-chip:10px;
+    --bg:#ffffff;
+    --panel:#f7f8fa;      /* 카드 뒤 옅은 면 */
+    --chip:#f2f4f6;       /* 태그 칩 */
+    --line:#e8ebee;       /* 헤어라인 */
+    --line-2:#dfe3e8;     /* hover 헤어라인 */
+    --text:#191f28;       /* 헤드라인 */
+    --text-2:#4e5968;     /* 본문 */
+    --text-3:#8b95a1;     /* 보조 */
+    --track1:#dd5a10;
+    --track2:#3182f6;
+    --track3:#7f56d9;
+    --r-card:24px;
+    --r-chip:9px;
     --container:720px;
   }
   *{margin:0;padding:0;box-sizing:border-box;}
-  /* 가로 오버플로 차단 — iOS Safari는 body만으로는 가로 팬을 막지 못함.
-     clip은 스크롤 컨테이너를 만들지 않아 fixed nav·Lenis·패럴랙스에 안전 */
   html{scroll-behavior:auto;overflow-x:hidden;overflow-x:clip;}
   body{
     background:var(--bg);
@@ -37,16 +37,19 @@
     -webkit-font-smoothing:antialiased;
     overflow-x:hidden;overflow-x:clip;
   }
-  ::selection{background:rgba(87,229,140,.3);}
+  ::selection{background:rgba(49,130,246,.18);}
 
   /* ---------- nav ---------- */
   nav{
     position:fixed;inset:0 0 auto 0;z-index:100;
     display:flex;justify-content:space-between;align-items:center;
     padding:20px 28px;
-    background:rgba(5,5,6,.6);
+    background:rgba(255,255,255,.76);
+    border-bottom:1px solid transparent;
     backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+    transition:border-color .3s;
   }
+  nav.is-scrolled{border-bottom-color:var(--line);}
   nav .logo{
     font-size:15px;font-weight:600;letter-spacing:-.01em;
     height:22px;line-height:22px;overflow:hidden;
@@ -60,97 +63,145 @@
   }
   @media (prefers-reduced-motion:reduce){nav .logo-slide{animation:none;}}
   nav .menu{display:flex;flex-direction:column;gap:7px;background:none;border:none;cursor:pointer;padding:6px 2px;}
-  nav .menu span{display:block;width:26px;height:2px;background:#fff;border-radius:2px;}
+  nav .menu span{display:block;width:26px;height:2px;background:var(--text);border-radius:2px;}
 
   .container{max-width:var(--container);margin:0 auto;padding:0 clamp(24px,10vw,150px);}
 
   /* ---------- hero ---------- */
   .hero{
     position:relative;
-    min-height:min(100svh,860px);
-    padding:132px 0 0;
+    padding:clamp(132px,15vh,178px) 0 0;
     overflow:hidden;
     background:var(--bg);
   }
-  /* 원본의 대각선 그린/퍼플 빔 그라데이션 — 비디오 위에 겹쳐 사각 경계를 감춤 */
+  /* 에셋을 뺀 대신 아주 옅은 컬러 웨이시로 화면의 성격만 남김 */
   .hero::after{
     content:"";
-    position:absolute;inset:0;
-    z-index:2;pointer-events:none;
-    mix-blend-mode:screen;
+    position:absolute;inset:0;z-index:0;pointer-events:none;
     background:
-      linear-gradient(118deg, transparent 34%, rgba(87,229,140,.07) 48%, transparent 62%),
-      radial-gradient(1000px 700px at 72% 18%, rgba(87,229,140,.09), transparent 62%),
-      radial-gradient(900px 700px at 88% 72%, rgba(179,155,255,.09), transparent 60%),
-      radial-gradient(700px 500px at 8% 85%, rgba(75,155,255,.05), transparent 60%);
-    /* 섹션 하단으로 갈수록 그라데이션을 지워 다음 섹션과 경계선이 생기지 않게 */
-    -webkit-mask-image:linear-gradient(#000 62%, transparent 96%);
-    mask-image:linear-gradient(#000 62%, transparent 96%);
+      radial-gradient(760px 520px at 88% 6%, rgba(221,90,16,.055), transparent 66%),
+      radial-gradient(680px 480px at 4% 62%, rgba(49,130,246,.045), transparent 68%);
   }
-  .glow{position:absolute;border-radius:50%;filter:blur(110px);pointer-events:none;}
-  .hero-inner{
-    position:relative; /* z-index 없음 — 자식들이 .hero::after(z-index:2)와 직접 겹치도록 */
-    width:fit-content;margin:0 auto;
-    padding:0 24px;
-    display:grid;
-    grid-template-areas:"h1" "asset" "sub";
-    justify-items:center;
+  /* 히어로·트랙 헤드는 카드 그리드와 같은 좌측 정렬선을 씁니다 (아래 .align 규칙) */
+  .hero-inner{position:relative;z-index:1;}
+  /* 핵심 아이덴티티 — 히어로의 헤드라인 */
+  .hero .lead{
+    font-size:clamp(28px,4.6vw,50px);
+    font-weight:480;line-height:1.3;letter-spacing:-.03em;
+    word-break:keep-all;
   }
-  /* 텍스트는 그라데이션 위, 오브젝트는 그라데이션 아래 */
-  .hero-inner > h1{grid-area:h1;position:relative;z-index:3;}
-  .hero-inner > .sub{grid-area:sub;position:relative;z-index:3;}
-  .hero-inner > .asset{grid-area:asset;}
-  /* 1300px 미만 — 타이틀만 왼쪽으로, 서브카피는 중앙 정렬 유지 */
-  @media (max-width:1299px){
-    .hero-inner > h1{justify-self:start;left:clamp(20px,6vw,70px);}
-    .hero-inner > .sub{justify-self:center;text-align:center;left:0;}
+  .hero .who{
+    margin-top:clamp(24px,2.8vw,34px);max-width:58ch;
+    font-size:clamp(15px,1.6vw,16px);line-height:1.78;
+    color:var(--text-2);word-break:keep-all;
   }
-  .hero h1{
-    font-size:clamp(42px,8.6vw,82px);
-    font-weight:380;line-height:1.12;letter-spacing:-.026em;
-    max-width:13ch; /* Simple / Questions, / Real Products 3줄 래핑 */
+  .hero .stats{
+    margin-top:clamp(40px,4.6vw,60px);padding-top:28px;
+    border-top:1px solid var(--line);
+    display:grid;grid-template-columns:repeat(4,1fr);gap:26px 20px;
   }
-  .hero .sub{
-    margin-top:28px;font-size:clamp(17px,2.1vw,21px);color:var(--text-3);line-height:1.6;
+  .hero .stats .v{
+    display:block;
+    font-size:clamp(24px,2.7vw,33px);
+    font-weight:480;letter-spacing:-.03em;line-height:1.1;
+    white-space:nowrap; /* "2,500명"이 두 줄로 쪼개지지 않게 */
   }
-  .hero .asset{
-    position:relative;z-index:1;
-    margin:clamp(-140px,-10vw,-40px) auto clamp(-120px,-8vw,-32px);
-    left:clamp(90px,20vw,300px); /* 오브젝트를 오른쪽 위로 */
-    width:min(82vw,660px);
-    will-change:transform;
+  .hero .stats .k{
+    display:block;margin-top:8px;
+    font-size:13px;line-height:1.5;color:var(--text-3);word-break:keep-all;
   }
-  /* 카드가 3열이 되는 지점부터 오브젝트를 글자 바로 오른쪽에 둡니다 */
+  /* 정렬선이 380px로 좁아지는 구간(<810px)부터 2열 — 4열은 폭이 95px밖에 안 남음 */
+  @media (max-width:809px){
+    .hero .stats{grid-template-columns:repeat(2,1fr);gap:26px 18px;}
+  }
+  @media (max-width:640px){
+    .hero{padding-top:124px;}
+    .hero .stats{gap:28px 16px;}
+    .hero .stats > div{text-align:center;}
+  }
+
+  /* ---------- 공통 정렬선 ----------
+     카드 그리드의 좌측 시작점과 히어로·트랙 헤드를 정확히 맞춥니다.
+     1열 380 / 2열 780(380*2+20) / 3열 1180(380*3+40) */
+  .hero-inner,.track-head{
+    width:min(380px,calc(100vw - 48px));
+    max-width:none;margin:0 auto;padding:0;
+  }
+  @media (min-width:810px){
+    .hero-inner,.track-head{width:min(780px,calc(100vw - 96px));}
+  }
   @media (min-width:1300px){
-    .hero-inner{
-      grid-template-areas:"h1 asset" "sub asset";
-      grid-template-columns:auto auto;
-      column-gap:clamp(16px,2.5vw,52px);
-      justify-items:start;
-      align-items:center;
-    }
-    .hero-inner > .asset{
-      align-self:center;
-      margin:24px 0 -40px;
-      left:0;
-      width:min(40vw,540px);
-    }
-    .hero-inner > .sub{margin-top:32px;}
+    .hero-inner,.track-head{width:min(1180px,calc(100vw - 96px));}
   }
-  .hero .asset img,.hero .asset video{width:100%;height:auto;display:block;}
-  /* mp4의 검은 배경을 페이지에 섞고, 가장자리를 페이드아웃해 사각 경계 제거 */
-  .hero .asset video{
-    mix-blend-mode:screen;
-    -webkit-mask-image:radial-gradient(ellipse 72% 72% at 50% 50%, #000 52%, transparent 80%);
-    mask-image:radial-gradient(ellipse 72% 72% at 50% 50%, #000 52%, transparent 80%);
-    /* 살짝 둥둥 떠 있는 모션 — 패럴랙스(figure의 transform)와 충돌하지 않게 video에 적용 */
-    animation:heroFloat 6s ease-in-out infinite;
+
+  /* ---------- menu sheet ---------- */
+  /* [hidden]은 UA 스타일이라 아래 display:flex에 밀림 → 명시적으로 죽여야 함 */
+  .menu-sheet[hidden]{display:none;}
+  .menu-sheet{
+    position:fixed;inset:0;z-index:200;
+    height:100vh;height:100dvh;
+    display:flex;align-items:center;justify-content:center;
+    /* 검정 투명 + 흐림 — 뒤 페이지가 형체만 남게 */
+    background:rgba(0,0,0,.72);
+    backdrop-filter:blur(32px) saturate(.85);-webkit-backdrop-filter:blur(32px) saturate(.85);
+    opacity:0;pointer-events:none;
+    transition:opacity .4s cubic-bezier(.16,1,.3,1);
   }
-  @keyframes heroFloat{
-    0%,100%{transform:translateY(0);}
-    50%{transform:translateY(-10px);}
+  .menu-sheet.is-open{opacity:1;pointer-events:auto;}
+  .menu-close{
+    position:absolute;top:20px;right:24px;z-index:2;
+    width:48px;height:48px;border:none;background:none;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+    color:#ffffff;transition:opacity .25s;
   }
-  @media (prefers-reduced-motion:reduce){.hero .asset video{animation:none;}}
+  .menu-close:hover{opacity:.7;}
+  /* .menu-list는 <nav>라서 상단 탭바용 nav 규칙(position:fixed·흰 배경·블러)을 상속받습니다.
+     전부 되돌려야 시트 안에서 정상 중앙 정렬됩니다. */
+  .menu-list{
+    position:static;inset:auto;z-index:auto;
+    background:none;backdrop-filter:none;-webkit-backdrop-filter:none;
+    border:none;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    gap:clamp(18px,2.7vh,28px);
+    padding:24px;max-height:100%;
+  }
+  .menu-item{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:clamp(19px,2.4vw,24px);
+    font-weight:700;letter-spacing:-.02em;
+    color:#fff;text-decoration:none;
+    opacity:0;transform:translateY(14px);
+    transition:opacity .5s cubic-bezier(.16,1,.3,1),transform .5s cubic-bezier(.16,1,.3,1),color .25s;
+  }
+  .menu-sheet.is-open .menu-item{opacity:1;transform:none;}
+  .menu-list .menu-item:nth-child(1){transition-delay:.04s;}
+  .menu-list .menu-item:nth-child(2){transition-delay:.09s;}
+  .menu-list .menu-item:nth-child(3){transition-delay:.14s;}
+  .menu-list .menu-item:nth-child(4){transition-delay:.19s;}
+  .menu-list .menu-item:nth-child(5){transition-delay:.24s;}
+  .menu-list .menu-item:nth-child(6){transition-delay:.29s;}
+  .menu-list .menu-item:nth-child(7){transition-delay:.34s;}
+  /* 현재 페이지 — 화살표 없이 같은 흰색 (원본 '컨퍼런스 안내'와 동일) */
+  .menu-item.is-current{cursor:default;}
+  a.menu-item:hover .ext{background:rgba(255,255,255,.34);transform:translate(1px,-1px);}
+  /* 외부 링크 화살표 칩 */
+  .ext{
+    width:26px;height:26px;border-radius:50%;flex-shrink:0;
+    background:rgba(255,255,255,.22);
+    display:inline-block;position:relative;
+    transition:background .25s,transform .25s;
+  }
+  .ext::before{
+    content:"";position:absolute;inset:0;
+    background:#fff;
+    -webkit-mask:no-repeat center/12px 12px url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2.6 9.4L9.4 2.6M3.9 2.6h5.5v5.5' fill='none' stroke='%23000' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    mask:no-repeat center/12px 12px url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2.6 9.4L9.4 2.6M3.9 2.6h5.5v5.5' fill='none' stroke='%23000' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  }
+  body.menu-open{overflow:hidden;}
+  @media (prefers-reduced-motion:reduce){
+    .menu-sheet,.menu-item{transition:none;}
+    .menu-sheet.is-open .menu-item{transform:none;}
+  }
 
   /* ---------- scroll cue ---------- */
   .scroll-cue{
@@ -160,16 +211,16 @@
     width:52px;height:52px;border-radius:50%;
     display:flex;align-items:center;justify-content:center;
     pointer-events:none;
-    color:rgba(255,255,255,.72);
-    background:rgba(255,255,255,.07);
-    border:1px solid rgba(255,255,255,.14);
+    color:var(--text-2);
+    background:rgba(255,255,255,.86);
+    border:1px solid var(--line);
     backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
     animation:cueBob 2s cubic-bezier(.45,0,.55,1) infinite;
     transition:opacity .45s ease, visibility .45s ease;
   }
   .scroll-cue svg{display:block;}
   @keyframes cueBob{
-    0%,100%{transform:translate(-50%,-4px);opacity:.6;}
+    0%,100%{transform:translate(-50%,-4px);opacity:.55;}
     50%{transform:translate(-50%,6px);opacity:1;}
   }
   .scroll-cue.is-hidden{opacity:0;visibility:hidden;}
@@ -177,162 +228,106 @@
   @media (max-width:640px){.scroll-cue{bottom:24px;width:46px;height:46px;}}
 
   /* ---------- track ---------- */
-  .track{position:relative;padding:150px 0 60px;overflow:visible;}
-  .track.t1{padding-top:clamp(56px,7vw,96px);}
+  .track{position:relative;padding:clamp(76px,8.5vw,116px) 0 clamp(24px,3vw,44px);}
   .track-pill{
     display:inline-block;
-    padding:8px 18px;border-radius:9999px;
-    font-size:15px;font-weight:600;
-    background:color-mix(in srgb,var(--accent) 12%,transparent);
+    padding:6px 15px;border-radius:9999px;
+    font-size:13px;font-weight:600;letter-spacing:.01em;
+    background:color-mix(in srgb,var(--accent) 10%,#fff);
     color:var(--accent);
   }
   .track-title{
-    margin-top:22px;
-    font-size:60px; /* 고정 — 810px에서만 한 번 변경 */
-    font-weight:480;letter-spacing:-.025em;line-height:1.12;
+    margin-top:16px;
+    font-size:clamp(34px,5.4vw,44px);
+    font-weight:480;letter-spacing:-.03em;line-height:1.14;
     color:var(--accent);
   }
   .track-desc{
-    margin-top:16px;font-size:17px;line-height:1.65;
-    color:color-mix(in srgb,var(--accent) 55%,rgba(255,255,255,.55));
+    margin-top:12px;font-size:16px;line-height:1.6;
+    color:var(--text-2);word-break:keep-all;
   }
-  /* 1열: 헤드 폭을 카드 열(410px)과 같은 고정폭으로 묶어, 뷰포트가 줄어도 배치가 흔들리지 않게 */
-  .track-head{
-    position:relative;
-    width:min(458px,100%);max-width:none;
-    padding:0 24px 0 28px; /* 타이틀 살짝 왼쪽으로 */
-  }
-  .track-asset{
-    position:absolute;right:-60px;top:140px;
-    width:270px;z-index:1;pointer-events:none; /* 고정 크기 */
-    will-change:transform;
-  }
-  /* 2열 전환(810px)에서 단 한 번만 배치 변경: 타이틀 왼쪽 끝, 에셋 오른쪽 끝 (카드 그리드 844px와 정렬) */
+  .track-head{position:relative;}
   @media (min-width:810px){
-    .track-head{width:min(844px,calc(100vw - 48px));max-width:none;padding:0;}
-    .track-asset{right:-40px;top:95px;width:320px;}
-    .track-title{font-size:84px;}
-  }
-  /* 1300px 이상: 헤드도 3열 그리드(1278px)와 좌우 정렬 */
-  @media (min-width:1300px){
-    .track-head{width:min(1278px,calc(100vw - 48px));}
-  }
-  /* Track 2 에셋(asset4)은 맨 뒤로 — 타이틀·카드 뒤에 깔리고, 글로우 그라데이션이 위를 덮음 */
-  .t2 .track-asset{z-index:-1;}
-  .t2 .track-asset img{
-    position:relative;z-index:0;
-    mix-blend-mode:screen; /* jpg 검은 배경 제거 */
-    -webkit-mask-image:radial-gradient(ellipse 70% 70% at 50% 50%,#000 52%,transparent 80%);
-    mask-image:radial-gradient(ellipse 70% 70% at 50% 50%,#000 52%,transparent 80%);
-  }
-  .t2 .track-asset::before{z-index:1;mix-blend-mode:screen;}
-  .track-asset::before{
-    content:"";position:absolute;inset:-20%;
-    background:radial-gradient(circle,color-mix(in srgb,var(--accent) 16%,transparent) 0%,transparent 70%);
-    filter:blur(60px);z-index:-1;
-  }
-  .track-asset img{width:100%;height:auto;display:block;}
-  /* 3D 에셋 플레이스홀더 (에셋 준비 전) */
-  .asset-ph{
-    width:100%;aspect-ratio:1;border-radius:50%;
-    background:radial-gradient(circle at 35% 30%,color-mix(in srgb,var(--accent) 55%,#fff 6%) 0%,color-mix(in srgb,var(--accent) 25%,transparent) 45%,transparent 72%);
-    filter:blur(2px) saturate(1.2);
-    opacity:.8;
+    .track-title{font-size:52px;}
   }
 
   /* ---------- cards ---------- */
-  /* 카드 크기는 고정(380px) — 뷰포트에 따라 늘어나지 않고, 넓어지면 열 수만 바뀜 */
   .cards{
-    position:relative;z-index:2;margin-top:130px;
-    display:grid;gap:24px;
-    grid-template-columns:min(410px,calc(100vw - 48px));
+    position:relative;z-index:2;margin-top:clamp(34px,4vw,52px);
+    display:grid;gap:20px;
+    grid-template-columns:min(380px,calc(100vw - 48px));
     justify-content:center;
-    max-width:none;padding:0 24px; /* .container 제약 해제 */
+    max-width:none;padding:0 24px;
   }
-  /* 2열부터는 좌우 여백을 48px로 두 배 확보 */
   @media (min-width:810px){
-    .cards{padding:0 48px;grid-template-columns:repeat(2,min(410px,calc(50vw - 60px)));}
+    .cards{padding:0 48px;grid-template-columns:repeat(2,min(380px,calc(50vw - 58px)));}
   }
-  /* 1300px에서 딱 한 번 3열로 전환 — 그 외 구간에서는 배치 고정 */
   @media (min-width:1300px){
-    .cards{grid-template-columns:repeat(3,min(410px,calc((100vw - 144px)/3)));}
+    .cards{grid-template-columns:repeat(3,min(380px,calc((100vw - 136px)/3)));}
   }
   .qcard{
-    position:relative;display:block;text-decoration:none;color:inherit;
-    background:rgba(20,21,23,.6);
-    backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+    position:relative;text-decoration:none;color:inherit;
+    background:var(--bg);
+    border:1px solid var(--line);
     border-radius:var(--r-card);
-    padding:30px 38px;
-    min-height:280px;
+    padding:24px 28px;
+    min-height:224px;
     display:flex;flex-direction:column;
     overflow:hidden;
-    transition:transform .55s cubic-bezier(.16,1,.3,1),background .55s;
+    transition:transform .55s cubic-bezier(.16,1,.3,1),border-color .55s,box-shadow .55s;
   }
-  /* 에셋이 겹치는 우상단에 유리 너머 글로우 */
+  /* 카드 상단에 트랙 색을 아주 옅게 — 다크의 글로우를 대체 */
   .qcard::before{
-    content:"";position:absolute;right:-40px;top:-60px;
-    width:240px;height:240px;border-radius:50%;
-    background:color-mix(in srgb,var(--accent) 14%,transparent);
-    filter:blur(70px);pointer-events:none;
-    transition:opacity .55s;opacity:.8;
-  }
-  .qcard::after{
-    content:"";position:absolute;left:-60px;bottom:-80px;
-    width:260px;height:260px;border-radius:50%;
-    background:color-mix(in srgb,var(--accent) 10%,transparent);
-    filter:blur(80px);pointer-events:none;
-    transition:opacity .55s;opacity:.7;
+    content:"";position:absolute;inset:0 0 auto 0;height:180px;
+    background:linear-gradient(180deg,color-mix(in srgb,var(--accent) 7%,transparent),transparent);
+    pointer-events:none;opacity:0;transition:opacity .55s;
   }
   .qcard:hover{
-    transform:translateY(-9px) scale(1.015);
-    background:rgba(32,33,37,.9);
+    transform:translateY(-9px);
+    border-color:color-mix(in srgb,var(--accent) 45%,#fff);
+    box-shadow:0 16px 40px color-mix(in srgb,var(--accent) 14%,transparent);
   }
-  /* 리빌(is-in)의 transform:none이 hover보다 우선 적용되던 문제 해결 */
   html.js .qcard[data-reveal].is-in{
-    transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .55s cubic-bezier(.16,1,.3,1),background .55s;
+    transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .55s cubic-bezier(.16,1,.3,1),border-color .55s,box-shadow .55s;
   }
-  html.js .qcard[data-reveal].is-in:hover{
-    transform:translateY(-9px) scale(1.015);
-  }
-  .qcard:hover::before,.qcard:hover::after{opacity:1;}
-  .qcard:hover .tag{
-    background:rgba(255,255,255,.12);
-    color:var(--text-1,#fff);
-  }
+  html.js .qcard[data-reveal].is-in:hover{transform:translateY(-9px);}
+  .qcard:hover::before{opacity:1;}
   .qcard h3{
-    font-size:31px; /* 카드 크기 고정에 맞춰 텍스트도 고정 */
-    font-weight:600;line-height:1.38;letter-spacing:-.015em;
-    max-width:15ch;
+    position:relative;
+    font-size:24px;
+    font-weight:600;line-height:1.42;letter-spacing:-.02em;
+    max-width:15ch;word-break:keep-all;
   }
-  .qcard .tags{margin-top:18px;display:flex;gap:8px;flex-wrap:wrap;}
+  .qcard .tags{position:relative;margin-top:14px;display:flex;gap:6px;flex-wrap:wrap;}
   .qcard .tag{
-    padding:6px 16px;border-radius:var(--r-chip);
-    background:var(--surface-2);
-    font-size:15px;color:var(--text-2);
+    padding:5px 12px;border-radius:var(--r-chip);
+    background:var(--chip);
+    font-size:13px;color:var(--text-2);
     transition:background .55s,color .55s;
   }
+  .qcard:hover .tag{background:color-mix(in srgb,var(--accent) 10%,#fff);color:var(--accent);}
   .qcard .foot{
-    margin-top:auto;padding-top:36px;
+    position:relative;margin-top:auto;padding-top:26px;
     display:flex;align-items:center;justify-content:space-between;
   }
-  .qcard .who{font-size:18px;font-weight:600;color:var(--accent);}
-  .qcard .meta{display:flex;align-items:center;gap:10px;font-size:15px;color:var(--text-3);}
+  .qcard .who{font-size:16px;font-weight:600;color:var(--accent);}
+  .qcard .meta{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--text-3);}
   .qcard .meta .time{
     opacity:0;transform:translateX(6px);
     transition:opacity .45s cubic-bezier(.16,1,.3,1),transform .45s cubic-bezier(.16,1,.3,1);
   }
   .qcard:hover .meta .time{opacity:1;transform:translateX(0);}
-  .qcard .meta svg{opacity:.6;transition:transform .4s cubic-bezier(.16,1,.3,1);}
+  .qcard .meta svg{transition:transform .4s cubic-bezier(.16,1,.3,1);}
   .qcard:hover .meta svg{transform:translateX(5px);}
   @media (pointer:coarse){.qcard .meta .time{opacity:1;transform:none;}}
 
-  .qcard.soon{cursor:default;}
-  .qcard.soon h3,.qcard.soon .tags,.qcard.soon .foot{opacity:.5;}
-  .qcard.soon::before,.qcard.soon::after{opacity:.35;}
-  .qcard.soon:hover{transform:none;background:rgba(20,21,23,.6);}
+  .qcard.soon{cursor:default;background:var(--panel);border-color:transparent;}
+  .qcard.soon h3,.qcard.soon .tags,.qcard.soon .foot{opacity:.55;}
+  .qcard.soon .tag{background:#fff;}
+  .qcard.soon:hover{transform:none;box-shadow:none;border-color:transparent;}
   html.js .qcard.soon[data-reveal].is-in:hover{transform:none;}
-  .qcard.soon:hover::before{opacity:.35;}
-  .qcard.soon:hover::after{opacity:.35;}
+  .qcard.soon:hover::before{opacity:0;}
+  .qcard.soon:hover .tag{background:#fff;color:var(--text-2);}
   .qcard .soon-badge{font-size:15px;color:var(--text-3);}
 
   /* track accents */
@@ -340,62 +335,60 @@
   .t2{--accent:var(--track2);}
   .t3{--accent:var(--track3);}
 
-  /* ---------- outro (검정 배경 + 하단 그라데이션, Simplicity 24 엔딩 문법) ---------- */
+  /* ---------- outro ---------- */
   .outro{
     position:relative;overflow:hidden;
-    padding:220px 0 160px;
+    padding:clamp(118px,13vw,168px) 0 clamp(96px,11vw,132px);
     background:var(--bg);
     text-align:center;
   }
   .outro::after{
-    content:"";position:absolute;inset:auto 0 0 0;height:460px;
+    content:"";position:absolute;inset:auto 0 0 0;height:420px;
     pointer-events:none;
     background:
-      radial-gradient(62% 100% at 50% 100%, rgba(179,155,255,.20), transparent 72%),
-      radial-gradient(38% 75% at 24% 100%, rgba(87,229,140,.08), transparent 70%),
-      radial-gradient(38% 75% at 78% 100%, rgba(75,155,255,.08), transparent 70%);
+      radial-gradient(62% 100% at 50% 100%, rgba(127,86,217,.09), transparent 72%),
+      radial-gradient(38% 75% at 22% 100%, rgba(0,178,92,.05), transparent 70%),
+      radial-gradient(38% 75% at 80% 100%, rgba(49,130,246,.05), transparent 70%);
   }
   .outro .container{position:relative;z-index:1;max-width:none;padding:0 24px;}
   .outro h2{
-    font-size:clamp(28px,4.2vw,46px);
-    font-weight:480;letter-spacing:-.025em;line-height:1.22;
+    font-size:clamp(27px,3.6vw,40px);
+    font-weight:480;letter-spacing:-.03em;line-height:1.26;
   }
   .outro .sub{
-    margin-top:22px;font-size:clamp(15px,1.8vw,18px);
-    color:var(--text-3);line-height:1.7;
+    margin-top:20px;font-size:clamp(15px,1.7vw,17px);
+    color:var(--text-2);line-height:1.7;
   }
-  /* 연락 블록 카드 — 질문 카드와 같은 고정폭 문법(410px, 810px에서만 2열 전환) */
   .contact-cards{
-    margin:64px auto 0;
+    margin:52px auto 0;
     display:grid;gap:20px;
-    grid-template-columns:min(410px,calc(100vw - 48px));
+    grid-template-columns:min(380px,calc(100vw - 48px));
     justify-content:center;
   }
   @media (min-width:810px){
-    .contact-cards{grid-template-columns:repeat(2,min(410px,calc(50vw - 36px)));}
+    .contact-cards{grid-template-columns:repeat(2,min(380px,calc(50vw - 36px)));}
   }
   .ccard{
     position:relative;display:flex;flex-direction:column;gap:14px;
     text-align:left;text-decoration:none;color:inherit;
-    background:rgba(20,21,23,.6);
-    backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+    background:var(--bg);
+    border:1px solid var(--line);
     border-radius:var(--r-card);
-    padding:18px 32px 22px;
-    overflow:hidden;
-    transition:transform .55s cubic-bezier(.16,1,.3,1),background .55s;
+    padding:16px 28px 20px;
+    transition:transform .55s cubic-bezier(.16,1,.3,1),border-color .55s,box-shadow .55s;
   }
-  .ccard:hover{transform:translateY(-7px);background:rgba(32,33,37,.9);}
+  .ccard:hover{transform:translateY(-7px);border-color:var(--line-2);box-shadow:0 14px 34px rgba(25,31,40,.08);}
   html.js .ccard[data-reveal].is-in{
-    transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .55s cubic-bezier(.16,1,.3,1),background .55s;
+    transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .55s cubic-bezier(.16,1,.3,1),border-color .55s,box-shadow .55s;
   }
   html.js .ccard[data-reveal].is-in:hover{transform:translateY(-7px);}
   .ccard .label{font-size:14px;font-weight:600;color:var(--text-3);}
   .ccard .foot{display:flex;align-items:center;justify-content:space-between;}
   .ccard .value{font-size:clamp(17px,2vw,21px);font-weight:600;letter-spacing:-.01em;word-break:break-all;}
-  .ccard svg{opacity:.6;transition:transform .4s cubic-bezier(.16,1,.3,1);}
+  .ccard svg{transition:transform .4s cubic-bezier(.16,1,.3,1);}
   .ccard:hover svg{transform:translateX(5px);}
   .outro .note{margin-top:72px;font-size:14px;color:var(--text-3);}
-  .outro .note a{color:var(--text-2);text-decoration:none;}
+  .outro .note a{color:var(--text-2);text-decoration:none;border-bottom:1px solid var(--line-2);}
   .outro .note a:hover{color:var(--text);}
 
   /* ---------- word reveal ---------- */
@@ -408,24 +401,22 @@
   }
   [data-word-reveal].is-visible .word-reveal__word{opacity:1;transform:translate3d(0,0,0);}
 
-  /* ---------- scroll reveal (JS 미동작 시에도 보이도록) ---------- */
+  /* ---------- scroll reveal ---------- */
   html.js [data-reveal]{opacity:0;transform:translateY(32px);}
   html.js [data-reveal].is-in{
     opacity:1;transform:none;
     transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1);
     transition-delay:var(--d,0s);
   }
-
   @media (prefers-reduced-motion:reduce){
     html.js [data-word-reveal]:not(.is-ready),.word-reveal__word,
     html.js [data-reveal]{opacity:1;transform:none;transition:none;}
   }
-
 </style>
 </head>
 <body>
 
-<nav>
+<nav id="nav">
   <span class="logo" aria-label="신영빈 — Product Engineer">
     <span class="logo-slide" aria-hidden="true">
       <span>신영빈</span>
@@ -433,20 +424,40 @@
       <span>신영빈</span>
     </span>
   </span>
-  <button class="menu" aria-label="메뉴"><span></span><span></span></button>
+  <button class="menu" id="menuBtn" aria-label="메뉴 열기" aria-expanded="false" aria-controls="menuSheet"><span></span><span></span></button>
 </nav>
+
+<!-- ================= MENU ================= -->
+<div class="menu-sheet" id="menuSheet" role="dialog" aria-modal="true" aria-label="프로필 안내" hidden>
+  <button class="menu-close" id="menuClose" aria-label="메뉴 닫기">
+    <svg width="26" height="26" viewBox="0 0 26 26" fill="none" aria-hidden="true">
+      <path d="M4 4l18 18M22 4L4 22" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+    </svg>
+  </button>
+  <nav class="menu-list" aria-label="프로필 링크">
+    <span class="menu-item is-current">프로필 안내</span>
+    <a class="menu-item" href="https://www.linkedin.com/in/sinobin" target="_blank" rel="noopener">링크드인<i class="ext" aria-hidden="true"></i></a>
+    <a class="menu-item" href="https://github.com/youngbin03" target="_blank" rel="noopener">GitHub<i class="ext" aria-hidden="true"></i></a>
+    <a class="menu-item" href="mailto:sinyoungbin0128@gmail.com">이메일<i class="ext" aria-hidden="true"></i></a>
+    <a class="menu-item" href="https://brunch.co.kr/@bd8bf3d24f3c4b7" target="_blank" rel="noopener">블로그<i class="ext" aria-hidden="true"></i></a>
+    <a class="menu-item" href="https://www.thurry.com/" target="_blank" rel="noopener">떠리<i class="ext" aria-hidden="true"></i></a>
+    <a class="menu-item" href="https://clip-web.vercel.app/" target="_blank" rel="noopener">CLIP<i class="ext" aria-hidden="true"></i></a>
+  </nav>
+</div>
 
 <!-- ================= HERO ================= -->
 <header class="hero">
   <div class="hero-inner">
-    <h1 data-word-reveal>Simple<br>Questions,<br>Real Products</h1>
-    <figure class="asset" data-parallax data-speed="0.16">
-      <!-- TODO: 직접 만든 3D 에셋으로 교체 -->
-      <video src="reference/asset0.mp4" autoplay muted loop playsinline></video>
-    </figure>
-    <p class="sub" data-reveal style="--d:.4s">
-      질문에서 시작해 검증하고, 만들고, 데이터로 끝을 결정합니다.
+    <h1 class="lead" data-word-reveal>사용자 문제를 검증해<br>제품과 운영의 성과로 연결합니다.</h1>
+    <p class="who" data-reveal style="--d:.25s">
+      한양대학교 컴퓨터소프트웨어학부 4학년 신영빈입니다. 실사용 제품을 기획하는 일부터 운영과 종료 결정까지 책임져 왔습니다. 미리캔버스에서 디자인 자산 재사용 엔진을 만들고, 그 전에는 떠리를 창업해 5인 팀을 리드하며 사용자 경험을 직접 구현했습니다.
     </p>
+    <div class="stats" data-reveal style="--d:.35s">
+      <div><span class="v">2,500명</span><span class="k">첫 제품 누적 이용자</span></div>
+      <div><span class="v">5인</span><span class="k">떠리 창업 · 개발 팀 리드</span></div>
+      <div><span class="v">1.8배</span><span class="k">알림 도입 후 구매 증가</span></div>
+      <div><span class="v">2배+</span><span class="k">기존 자산의 잠재 활용가치</span></div>
+    </div>
   </div>
 </header>
 
@@ -459,24 +470,19 @@
 <!-- ================= TRACK 1 ================= -->
 <section class="track t1">
   <div class="container track-head">
-    <div class="track-asset" data-parallax data-speed="0.12">
-      <!-- TODO: 검증 은유 3D 에셋 -->
-      <img src="reference/asset2.avif" alt="" onerror="this.outerHTML='<div class=asset-ph></div>'">
-    </div>
     <span class="track-pill" data-reveal>Track 1</span>
     <h2 class="track-title" data-word-reveal>Proof First</h2>
     <p class="track-desc" data-reveal style="--d:.15s">
-      만들기 전에 증명하고,<br>
-      안 되면 접은 이야기
+      만들기 전에 증명하고, 안 되면 접은 이야기
     </p>
   </div>
-  <div class="container cards" data-reveal-group>
+  <div class="container cards">
     <a class="qcard" href="siknyang.html" data-reveal>
       <h3>모두가 공감하는 문제,<br>정말 만들어야 할까?</h3>
       <div class="tags"><span class="tag">문제정의</span><span class="tag">안정성</span></div>
       <div class="foot">
         <span class="who">오늘의 식냥</span>
-        <span class="meta"><span class="time">3분</span> <svg width="8" height="14" viewBox="0 0 8 14" fill="none"><path d="M1 1l6 6-6 6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <span class="meta"><span class="time">3분</span> <svg width="8" height="14" viewBox="0 0 8 14" fill="none"><path d="M1 1l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
       </div>
     </a>
     <a class="qcard" href="thurry-build.html" data-reveal style="--d:.1s">
@@ -484,15 +490,15 @@
       <div class="tags"><span class="tag">수요검증</span><span class="tag">결제시스템</span></div>
       <div class="foot">
         <span class="who">떠리</span>
-        <span class="meta"><span class="time">4분</span> <svg width="8" height="14" viewBox="0 0 8 14" fill="none"><path d="M1 1l6 6-6 6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <span class="meta"><span class="time">4분</span> <svg width="8" height="14" viewBox="0 0 8 14" fill="none"><path d="M1 1l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
       </div>
     </a>
     <a class="qcard" href="thurry-end.html" data-reveal style="--d:.2s">
-      <h3>무료로 줘도<br>사람들이 오지 않는다면?</h3>
+      <h3>무료로 줘도<br>모이지 않는다면?</h3>
       <div class="tags"><span class="tag">플랫폼시장</span><span class="tag">종료결정</span></div>
       <div class="foot">
         <span class="who">떠리</span>
-        <span class="meta"><span class="time">4분</span> <svg width="8" height="14" viewBox="0 0 8 14" fill="none"><path d="M1 1l6 6-6 6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <span class="meta"><span class="time">4분</span> <svg width="8" height="14" viewBox="0 0 8 14" fill="none"><path d="M1 1l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
       </div>
     </a>
     <div class="qcard soon" data-reveal style="--d:.3s">
@@ -509,24 +515,19 @@
 <!-- ================= TRACK 2 ================= -->
 <section class="track t2">
   <div class="container track-head">
-    <div class="track-asset" data-parallax data-speed="0.14">
-      <!-- TODO: 구조 은유 3D 에셋 -->
-      <img src="reference/asset4.jpg" alt="" onerror="this.outerHTML='<div class=asset-ph></div>'">
-    </div>
     <span class="track-pill" data-reveal>Track 2</span>
     <h2 class="track-title" data-word-reveal>Fixed and Free</h2>
     <p class="track-desc" data-reveal style="--d:.15s">
-      AI에게 무엇을 맡기고,<br>
-      무엇을 고정할지 정한 이야기
+      AI에게 맡길 것과 책임질 것을 알아간 이야기
     </p>
   </div>
   <div class="container cards">
     <a class="qcard" href="capacity.html" data-reveal>
-      <h3>이 판단,<br>정말 LLM이 필요할까?</h3>
-      <div class="tags"><span class="tag">자산가동률</span><span class="tag">결정론로직</span></div>
+      <h3>안 되는 이유가 없는데<br>왜 아무도 안 했을까?</h3>
+      <div class="tags"><span class="tag">문제발견</span><span class="tag">수용력</span></div>
       <div class="foot">
         <span class="who">재사용 판정</span>
-        <span class="meta"><span class="time">4분</span> <svg width="8" height="14" viewBox="0 0 8 14" fill="none"><path d="M1 1l6 6-6 6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <span class="meta"><span class="time">4분</span> <svg width="8" height="14" viewBox="0 0 8 14" fill="none"><path d="M1 1l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
       </div>
     </a>
     <a class="qcard" href="stencil.html" data-reveal style="--d:.1s">
@@ -534,7 +535,7 @@
       <div class="tags"><span class="tag">생성제약</span><span class="tag">디자인시스템</span></div>
       <div class="foot">
         <span class="who">Stencil</span>
-        <span class="meta"><span class="time">4분</span> <svg width="8" height="14" viewBox="0 0 8 14" fill="none"><path d="M1 1l6 6-6 6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <span class="meta"><span class="time">4분</span> <svg width="8" height="14" viewBox="0 0 8 14" fill="none"><path d="M1 1l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
       </div>
     </a>
     <a class="qcard" href="bg-composer.html" data-reveal style="--d:.2s">
@@ -542,7 +543,7 @@
       <div class="tags"><span class="tag">검색기반생성</span><span class="tag">배치관계</span></div>
       <div class="foot">
         <span class="who">Background Composer</span>
-        <span class="meta"><span class="time">3분</span> <svg width="8" height="14" viewBox="0 0 8 14" fill="none"><path d="M1 1l6 6-6 6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <span class="meta"><span class="time">3분</span> <svg width="8" height="14" viewBox="0 0 8 14" fill="none"><path d="M1 1l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
       </div>
     </a>
   </div>
@@ -558,14 +559,14 @@
         <span class="label">GitHub</span>
         <span class="foot">
           <span class="value">youngbin03</span>
-          <svg width="8" height="14" viewBox="0 0 8 14" fill="none"><path d="M1 1l6 6-6 6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg width="8" height="14" viewBox="0 0 8 14" fill="none"><path d="M1 1l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </span>
       </a>
       <a class="ccard" href="mailto:sinyoungbin0128@gmail.com" data-reveal style="--d:.1s">
         <span class="label">Email</span>
         <span class="foot">
           <span class="value">sinyoungbin0128@gmail.com</span>
-          <svg width="8" height="14" viewBox="0 0 8 14" fill="none"><path d="M1 1l6 6-6 6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg width="8" height="14" viewBox="0 0 8 14" fill="none"><path d="M1 1l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </span>
       </a>
     </div>
@@ -574,7 +575,6 @@
 </section>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
 <script>
 (function(){
@@ -582,16 +582,13 @@
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var hasGsap = typeof gsap !== "undefined";
 
-  /* ---- Lenis smooth scroll + GSAP ticker 동기화 ---- */
+  var lenis = null;
   if(!reduceMotion && typeof Lenis !== "undefined" && hasGsap){
-    gsap.registerPlugin(ScrollTrigger);
-    var lenis = new Lenis({ lerp:0.08, smoothWheel:true, wheelMultiplier:0.9 });
-    lenis.on("scroll", ScrollTrigger.update);
+    lenis = new Lenis({ lerp:0.08, smoothWheel:true, wheelMultiplier:0.9 });
     gsap.ticker.add(function(t){ lenis.raf(t*1000); });
     gsap.ticker.lagSmoothing(0);
   }
 
-  /* ---- 단어 리빌 (staggered-word-reveal 스킬 준수) ---- */
   function splitWordReveal(el){
     if(el.dataset.wordRevealReady === "true") return;
     var text = el.textContent || "";
@@ -635,33 +632,50 @@
     revealEls.forEach(function(el){ io.observe(el); });
   }
 
-  /* ---- 3D 에셋 parallax ---- */
-  if(!reduceMotion && hasGsap){
-    gsap.utils.toArray("[data-parallax]").forEach(function(layer){
-      var speed = Number(layer.dataset.speed || 0.15);
-      gsap.to(layer, {
-        y: function(){ return window.innerHeight * speed * -1; },
-        ease: "none",
-        scrollTrigger:{
-          trigger: layer,
-          start: "top bottom",
-          end: "bottom top",
-          scrub: 1.2,
-          invalidateOnRefresh: true
-        }
-      });
-    });
-    window.addEventListener("load", function(){ ScrollTrigger.refresh(); });
-  }
-
-  /* ---- 최상단에서만 스크롤 큐 노출 ---- */
   var cue = document.getElementById("scrollCue");
-  if(cue){
-    var syncCue = function(){
-      cue.classList.toggle("is-hidden", window.scrollY > 40);
+  var navEl = document.getElementById("nav");
+  var onScroll = function(){
+    var y = window.scrollY;
+    if(cue) cue.classList.toggle("is-hidden", y > 40);
+    if(navEl) navEl.classList.toggle("is-scrolled", y > 8);
+  };
+  onScroll();
+  window.addEventListener("scroll", onScroll, { passive:true });
+
+  /* ---- 메뉴 시트 ---- */
+  var sheet = document.getElementById("menuSheet");
+  var btn = document.getElementById("menuBtn");
+  var closeBtn = document.getElementById("menuClose");
+  if(sheet && btn){
+    var openMenu = function(){
+      sheet.hidden = false;
+      requestAnimationFrame(function(){ sheet.classList.add("is-open"); });
+      btn.setAttribute("aria-expanded","true");
+      document.body.classList.add("menu-open");
+      if(lenis) lenis.stop();
+      closeBtn.focus();
     };
-    syncCue();
-    window.addEventListener("scroll", syncCue, { passive:true });
+    var closeMenu = function(){
+      sheet.classList.remove("is-open");
+      btn.setAttribute("aria-expanded","false");
+      document.body.classList.remove("menu-open");
+      if(lenis) lenis.start();
+      btn.focus();
+      window.setTimeout(function(){
+        if(!sheet.classList.contains("is-open")) sheet.hidden = true;
+      }, 420);
+    };
+    btn.addEventListener("click", openMenu);
+    closeBtn.addEventListener("click", closeMenu);
+    sheet.addEventListener("click", function(e){
+      if(e.target === sheet) closeMenu();
+    });
+    sheet.addEventListener("click", function(e){
+      if(e.target.closest("a.menu-item")) closeMenu();
+    });
+    document.addEventListener("keydown", function(e){
+      if(e.key === "Escape" && sheet.classList.contains("is-open")) closeMenu();
+    });
   }
 })();
 </script>
