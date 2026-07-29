@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>무료로 줘도 모이지 않는다면? — 신영빈</title>
+<title>기능을 더하면 사람들이 쓸까? — 신영빈</title>
 <meta name="description" content="신영빈 포트폴리오 — 더 나은 정답보다, 더 나은 문제를 찾습니다.">
 <meta property="og:type" content="website">
-<meta property="og:title" content="무료로 줘도 모이지 않는다면? — 신영빈">
+<meta property="og:title" content="기능을 더하면 사람들이 쓸까? — 신영빈">
 <meta property="og:description" content="더 나은 정답보다, 더 나은 문제를 찾습니다.">
-<meta property="og:url" content="https://youngbin03.github.io/thurry-end.html">
+<meta property="og:url" content="https://youngbin03.github.io/clip.html">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <style>
@@ -248,6 +248,16 @@
     .links a .u{display:none;}
   }
 
+  /* ---------- 이미지 2열 ---------- */
+  .media-pair{margin:48px 20px 0;display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
+  .media-pair figure{min-width:0;}
+  .media-pair img{width:100%;height:auto;display:block;border-radius:10px;border:1px solid #e8ebee;}
+  .media-pair .caption{padding:12px 2px 0;font-size:13px;color:var(--mute);text-align:center;line-height:1.5;}
+  @media (max-width:640px){
+    .media-pair{margin:36px 0 0;gap:14px;}
+    .media-pair .caption{font-size:12px;padding-top:10px;}
+  }
+
   /* ---------- reveal ---------- */
   html.js [data-reveal]{opacity:0;transform:translateY(24px);}
   html.js [data-reveal].is-in{
@@ -267,137 +277,114 @@
 </nav>
 
 <header class="container article-head">
-  <h1>무료로 줘도<br>모이지 않는다면? | 떠리 #2</h1>
-  <div class="tags"><span class="tag">#플랫폼시장</span><span class="tag">#차별성</span><span class="tag">#종료결정</span></div>
+  <h1>기능을 더하면<br>사람들이 쓸까?</h1>
+  <div class="tags"><span class="tag">#동아리멘토링</span><span class="tag">#진입장벽</span><span class="tag">#전환비용</span></div>
   <div class="byline">
-    <p class="sum">8개월 동안 내린 결정과 그 결과를 책임지며, 제품보다 사업에서 더 많이 배운 기록</p>
+    <p class="sum">개인의 불편을 모으면 조직이 쓰는 제품이 될 거라 믿고 6개월을 만들었다가, 그 가정이 틀렸다는 걸 확인한 기록</p>
     <dl class="meta">
-      <div><dt>기간</dt><dd>2025.02 – 2025.09 (8개월)</dd></div>
-      <div><dt>팀</dt><dd>5인 공동창업 팀</dd></div>
-      <div><dt>역할</dt><dd>공동창업 · 개발 팀 리드 · 매장 영업 · 운영 · 사업성 판단</dd></div>
+      <div><dt>팀</dt><dd>3인 팀 · 앱 개발 동아리</dd></div>
+      <div><dt>역할</dt><dd>팀 리드 · 멘토 · 서비스 전반 설계·운영</dd></div>
     </dl>
-  </div>
-  <div class="metrics">
-    <div><div class="k">월 최대 매출 (피크)</div><div class="v">200만 원</div></div>
-    <div><div class="k">6개월 누적 거래액</div><div class="v">500만 원</div></div>
-    <div><div class="k">0원 실험 재구매율</div><div class="v">4%</div></div>
   </div>
 </header>
 
 <article class="container article-body">
-  <p>앞선 글에서는 앱 없이 수요를 증명하고, 결제·예약 시스템을 붙여 <strong>떠리</strong>를 출시한 뒤 매출을 키우기까지를 이야기했어요.</p>
-  <p>이번 글은 <strong>그래서 어떻게 망했는지</strong>에 대한 이야기예요. 제품을 만드는 것만큼, 사업을 굴리는 데서 배운 것도 많았거든요.</p>
+  <p>앱 개발 동아리에서 강사와 멘토로 활동하다가, 멘토링 활동으로 <strong>실제 쓰이는 제품</strong>을 만들어보고 싶었어요. 그렇게 3명이 6개월 동안 동아리 운영 관리 서비스 <strong>클립</strong>을 만들었어요.</p>
+  <p>여러 도구와 문서에 흩어진 운영 업무를 하나로 묶겠다는 뜻으로 붙인 이름이었죠. 결론부터 말하면, <strong>그 "하나로 묶는다"가 문제였어요.</strong></p>
 
   <figure class="media" data-reveal>
-    <img src="reference/thurry-marketing.jpg" alt="">
+    <img src="reference/clip-6.png" alt="클립의 기능 소개 화면">
+    <figcaption class="caption">일정·공지·정산·출석·과제 제출·회원 관리까지, 한 서비스에 다 담았어요</figcaption>
   </figure>
 
+  <h2>운영진 30명에게 물었더니 문제는 분명했어요</h2>
+  <p>동아리를 직접 운영하며 가장 크게 느낀 건 <strong>정산과 인수인계</strong>였어요. 뒤풀이가 끝날 때마다 새 단체 채팅방을 만들어 참석자를 확인하고 비용을 나눴고, 카드뉴스·면접 자료·공지 템플릿 같은 운영 자료는 담당자가 바뀔 때마다 맥락이 끊겼죠.</p>
+  <p>문제를 구체화하려고 <strong>운영진 약 30명을 인터뷰했어요.</strong> 재무 담당자는 매번 참여자를 확인하고 정산하는 게 어렵다고 했고, 공지 담당자는 누가 읽었는지 빠르게 알고 싶어 했어요. 일정 관리, 출석, 과제 제출, 회원 관리까지 담당 업무마다 다른 불편이 나왔고요.</p>
+  <p>여기서 <strong>"문제는 분명히 있다"는 확신을 얻었어요.</strong> 그리고 그 확신이 다음 판단을 흐리게 만들었어요.</p>
 
-  <h2>결정적인 판단 하나가 어긋났어요</h2>
-  <p>기존 서비스는 전부 <strong>랜덤 패키지</strong>였어요. 안에 뭐가 들었는지 모르지만 30~40% 저렴하게 묶음으로 사가는 구조죠. 저희는 <strong>개별 상품 선택</strong>으로 갔어요.</p>
-  <p>근거는 사전 설문이었어요. 오픈채팅방 학생 <strong>170명 중 134명(약 79%)</strong>이 개별 상품을 선호했거든요. 원하는 것만 살 수 있고 최소 결제 금액도 낮으니 구매 장벽이 내려간다고 판단했죠.</p>
-  <p><strong>그런데 이 설문에 사장님 응답은 없었어요.</strong> 표본이 적어서 분석에서 뺐거든요. 사용자 79%는 확보하고, <strong>같은 방식을 매일 운영해야 하는 쪽의 데이터 없이</strong> 핵심 차별점을 정한 거예요.</p>
+  <h2>각자의 불편을 다 풀려다 올인원이 됐어요</h2>
+  <p>처음 만든 건 하나였어요. GPS로 뒤풀이 장소에 있던 사람을 판별해 <strong>정산 참여자를 자동으로 뽑는 기능</strong>이요. 그다음부터 인터뷰에서 나온 요구를 하나씩 얹었어요.</p>
+  <p>일정 관리, 공지, 정산, 출석, 과제 제출, 회원 등록, 동아리 지원, 반복 일정과 반복 공지까지. 구글 캘린더·시트·설문에 노션과 카카오톡을 오가는 일을 <strong>한 제품으로 통합하고 싶었어요.</strong></p>
 
-  <h2>72곳이 거절한 이유를 들었어요</h2>
-  <p>앱을 출시하려면 팔 상품이 필요했어요. 성동구 베이커리를 <strong>하루 약 다섯 곳씩 한 달, 총 80곳 이상</strong> 방문했죠. 그렇게 넉 달에 걸쳐 <strong>8곳</strong>이 입점했어요.</p>
-  <p>처음엔 남는 빵을 팔아준다니 당연히 좋아하실 거라 생각했어요. 그래서 <strong>거절을 영업 능력 부족으로 읽었어요.</strong> 더 잘 준비해서 가면 되는 문제라고요.</p>
-  <p>돌이켜보면 이 숫자 자체가 이미 답이었어요. 현장에서 들은 이유는 저희 설득이 부족해서가 아니었거든요.</p>
+  <blockquote class="pull" data-reveal>불편을 하나씩 해결할수록,<br>제품은 하나씩 더 복잡해졌다.</blockquote>
 
-  <h3>1) 기존 고객과의 가격 형평성</h3>
-  <p>5시까지 5천 원에 사던 빵을 5시 1분에 3,500원에 팔면, 정가로 산 손님은 어떻게 되나요. 손님들이 정시에 안 사고 마감만 기다릴 가능성도 있었어요.</p>
-
-  <h3>2) 브랜드 가치</h3>
-  <p>사장님들은 본인 상품이 <strong>낮은 가격과 함께 공개적으로 노출되는 것</strong>을 부담스러워하셨어요. 기존 서비스들이 랜덤 패키지를 쓴 이유가 여기 있었더라고요.</p>
-
-  <h3>3) 추가 운영 부담</h3>
-  <p>이미 배달·예약으로 플랫폼을 서너 개씩 쓰고 계셨어요. 떠리를 추가하면 매일 상품과 수량을 등록하고 실제 재고와 맞춰야 했죠. <strong>빵 몇 개 더 팔려고 새로운 관리 업무를 떠안는 구조</strong>였어요.</p>
-
-  <h3>4) 기대보다 낮은 경제적 효용</h3>
-  <p>일부 매장은 남는 빵을 직원에게 주거나 기부하고 계셨어요. 이미 처리 방법이 있으니 적은 금액을 벌자고 일을 늘릴 이유가 없었던 거죠.</p>
-  <p>사장님이 원한 건 폐기 비용 절감이 아니었어요. <strong>새로운 손님의 방문과 재구매</strong>였죠. 결국 공급자가 원한 건 할인 판매 기능이 아니라 실질적인 구매력과 홍보 효과였어요.</p>
-
-  <h2>사용자에게 좋은 게 시장에 좋은 건 아니었어요</h2>
-  <p>여기서 앞의 설문이 돌아왔어요. 개별 상품 선택은 사용자 79%가 선호한 방식이지만, 사장님은 <strong>상품마다 마감할 수량을 매일 등록</strong>해야 했어요.</p>
-
-  <blockquote class="pull" data-reveal>사용자의 선택권을 늘릴수록<br>공급자의 관리 비용도 함께 늘어난다.</blockquote>
-
-  <p>기존 서비스의 랜덤 패키지는 사용자 경험이 부족한 게 아니라 <strong>공급자의 부담을 줄이려는 구조</strong>였어요. 설문에서 사장님 표본을 확보하지 못한 게 여기서 비용으로 돌아왔죠.</p>
-
-  <h2>돈을 잘못 벌었어요</h2>
-  <p>6개월 누적 거래액은 <strong>500만 원</strong>이었어요. 월 최대 매출이 200만 원이니 평월은 그 절반에도 못 미쳤다는 뜻이죠. 그리고 최고 매출을 낸 그 달에도 단위 경제성은 무너져 있었어요.</p>
-
-  <p>구조부터 문제였어요. 떠리는 전자상거래 소매중개업이었고, 개인사업자로는 가맹점 계약을 위한 PG업 등록이 어려웠어요. 그래서 <strong>토스 지급대행 서비스를 함께 써야 했는데, 여기에 월 고정 이용료가 붙었어요.</strong></p>
-
-  <div class="note-panel" data-reveal>
-    <ol>
-      <li>수수료 10% → 월 매출 200만 원에도 수익은 <strong>약 20만 원</strong></li>
-      <li>지급대행 <strong>월 고정 이용료 30만 원</strong> + 지급 건당 수수료</li>
-      <li>간편결제 수수료 <strong>3.4%</strong>는 별도</li>
-      <li>여기에 서버·마케팅·영업·운영 비용이 추가</li>
-      <li><strong>최고 매출을 낸 달에도 적자</strong></li>
-    </ol>
+  <div class="media-pair" data-reveal>
+    <figure>
+      <img src="reference/clip-2.png" alt="웹 운영자용 공유 캘린더 화면">
+      <figcaption class="caption">웹 · 운영자용 공유 캘린더</figcaption>
+    </figure>
+    <figure>
+      <img src="reference/clip-3.png" alt="모바일 참여자 앱의 자동 출석 체크 화면">
+      <figcaption class="caption">모바일 · 참여자용 자동 출석</figcaption>
+    </figure>
   </div>
 
-  <p>핵심은 <strong>30만 원이 거래량과 무관한 고정비</strong>였다는 거예요. 매출이 절반으로 줄어도 그대로 나가고, 두 배가 돼도 그대로예요. 수수료 수익이 이 고정비를 넘기려면 <strong>월 거래액이 최소 300만 원 이상</strong>이어야 했는데, 최고의 달에도 200만 원이었어요.</p>
-  <p>캠퍼스타운 분기 지원금 500만 원으로 버티는 구조였어요. 그때 구분해야 했던 건 <strong>더 열심히 하면 풀리는 문제인지, 구조적으로 안 되는 문제인지</strong>였어요. 고정비는 열심히 해서 풀리는 종류가 아니었어요.</p>
+  <h2>이탈은 기능이 아니라 가입에서 났어요</h2>
+  <p>연합 동아리 2곳, 소속 동아리 1곳, 스타트업 2곳까지 <strong>5개 팀에 베타 테스트</strong>를 돌렸어요. 그런데 가장 큰 이탈이 나온 곳은 기능을 쓰는 단계가 아니었어요. <strong>회원 등록 단계였죠.</strong></p>
+  <p>100명 규모 동아리가 클립을 쓰려면 회원 전원을 새 서비스에 가입시키고 구글 계정 연동까지 설득해야 했어요. 운영진 한 명이 필요를 느껴도 <strong>동아리원 전체가 함께 옮기지 않으면 제품이 작동하지 않았어요.</strong></p>
+  <p>큰 동아리에서는 가입 자체가 거의 일어나지 않았고, <strong>6~7명 규모의 스타트업 팀에서만</strong> 온보딩이 됐어요.</p>
+  <p>운영진 개인의 불편은 확인했지만, <strong>조직 전체가 기존 도구를 버릴 만큼의 이유는 못 만든 거예요.</strong></p>
 
-  <h2>가장 강한 조건으로 마지막 실험을 했어요</h2>
-  <p>방학이 시작되자 구매가 눈에 띄게 줄었어요. 팔리지 않으니 점주는 상품을 올리지 않고, 볼 게 없으니 사용자는 앱을 열지 않고, 사용자가 없으니 점주는 더 소홀해졌죠. 전형적인 악순환이었어요.</p>
-  <p>그래서 <strong>빵값을 0원으로 만드는 실험</strong>을 설계했어요. 1,900원짜리 일주일 패스를 사면 하루 한 번 빵을 0원에 받아가는 구조였죠.</p>
+  <h2>많이 만들었는데, 쓰인 건 두 개였어요</h2>
+  <p>실제로 반복해서 쓰인 기능은 둘뿐이었어요. <strong>팀원 시간표를 겹쳐 보는 캘린더</strong>와, 링크를 공유해 가능한 시간을 모으는 <strong>일정 조율</strong>이요.</p>
+  <p>인터뷰에서 필요하다고 했던 정산·공지·출석·과제 관리는 <strong>거의 행동으로 이어지지 않았어요.</strong></p>
 
-  <blockquote class="pull" data-reveal>무료로 줘도 사람들이 오지 않는다면,<br>가격은 핵심 문제가 아니다.</blockquote>
+  <blockquote class="pull" data-reveal>말하는 불편과,<br>새 서비스를 도입하는 행동은 다른 것이었다.</blockquote>
 
+  <p>그나마 쓰인 두 기능에는 공통점이 있었어요. <strong>회원 전체를 가입시키지 않아도 동작한다</strong>는 점이요. 시간표는 에브리타임 URL 하나만 붙이면 되고, 일정 조율은 링크를 받은 사람이 그냥 누르면 됐어요. 나중에 돌아보니 이게 답이었는데, 그때는 신호로 읽지 못했어요.</p>
+
+  <div class="media-pair" data-reveal>
+    <figure>
+      <img src="reference/clip-4.png" alt="에브리타임 시간표 연동 화면">
+      <figcaption class="caption">에브리타임 URL 하나로 시간표를 가져와요</figcaption>
+    </figure>
+    <figure>
+      <img src="reference/clip-5.png" alt="구글 캘린더 양방향 동기화 화면">
+      <figcaption class="caption">구글 캘린더 양방향 동기화</figcaption>
+    </figure>
+  </div>
+
+  <h2>복잡함을 AI 채팅으로 덮어봤어요</h2>
+  <p>기능이 너무 많아 쓰기 어렵다는 문제를 <strong>AI 채팅 인터페이스</strong>로 풀어보려 했어요. "다음 주에 모두 가능한 시간을 찾아줘"라고 입력하면 시간을 추천하고, "일정을 등록해줘"라고 하면 입력 카드를 띄우는 방식이었죠.</p>
+  <p>기존에 만든 일정·공지·회원 관리 기능을 채팅이 호출하도록 연결했어요. AI는 <strong>의도만 해석하고</strong>, 실제 조율은 상태머신이 처리하게 해서 모델의 불확실성을 로직 바깥에 뒀고요. 클릭 수와 목표까지 가는 인지 부담은 실제로 줄었어요.</p>
 
   <figure class="media" data-reveal>
-    <img src="reference/thurry-zero-flow.png" alt="">
+    <img src="reference/clip-1.png" alt="복잡한 온보딩을 AI 채팅으로 대체한 화면">
+    <figcaption class="caption">튜토리얼을 더하는 대신, 자연어 한 줄로 시작할 수 있게 만들었어요</figcaption>
   </figure>
 
+  <p>그런데 <strong>사용성이 좋아지는 것과 필요해지는 것은 다른 문제였어요.</strong> 복잡한 인터페이스는 해결했지만, 기존 방식을 버려야 할 이유는 여전히 만들지 못했죠.</p>
 
-  <div class="note-panel" data-reveal>
-    <ol>
-      <li>패스를 접한 사용자 <strong>약 350명</strong></li>
-      <li>패스 구매 <strong>약 50명</strong> (약 11%)</li>
-      <li>실제로 빵을 픽업 <strong>약 20명</strong> (구매자의 40%)</li>
-      <li>두 번 이상 픽업 <strong>2명</strong> (구매자의 약 4%)</li>
-    </ol>
-  </div>
+  <h2>"이걸 누가 원하나"에서 멈췄어요</h2>
+  <p>AI 기능과 화면을 만드는 과정 자체는 재미있었어요. 어려운 문제를 푸는 데 몰입했고요. 그런데 어느 순간 피할 수 없는 질문이 남았어요.</p>
 
-  <p><strong>돈을 내고 패스를 산 50명 중 30명이 한 번도 오지 않았어요.</strong> 병목은 가격이 아니라 인지도와 이용 습관이었죠.</p>
+  <blockquote class="pull" data-reveal>이 제품을 실제로 원하는 사람은 누구인가?</blockquote>
 
-  <h2>종료도 제품 결정이었어요</h2>
-  <p>꽃집 등 다른 상품군 확장도 검토했어요. 그런데 <strong>매장을 직접 영업하고 재고를 입력하게 만들고 양쪽 문의를 처리해야 하는 구조</strong>는 그대로였죠. 여기에 팀원들의 군 입대와 역할 변화도 겹쳤고요.</p>
-  <p>가장 강한 조건에서 핵심 가설이 검증되지 않았고, 더 투입해도 구조가 개선될 가능성이 낮다고 판단했어요. <strong>감정이 아니라 구매·재구매 데이터를 근거로 종료했어요.</strong></p>
-  <p>다만 솔직하게 덧붙이면, <strong>이 실험을 시작하기 전에 "어느 수준이면 접는다"를 미리 정해두지 않았어요.</strong> 결과를 다 보고 나서 판단한 거죠. 기준선이 없으면 어떤 숫자가 나와도 "조금만 더"를 붙일 수 있다는 걸 그때 알았어요.</p>
-  <p>지금은 실험을 설계할 때 <strong>성공 기준과 종료 기준을 함께 적고 시작해요.</strong> 회사에서 PoC를 제안할 때도 같은 순서예요.</p>
+  <p>관심을 보이는 사람은 있었지만, <strong>새 도구를 배우고 팀원을 설득하면서까지 쓰려는 사람은 거의 없었어요.</strong> 저는 사용자가 필요한 것을 만드는 대신 <strong>제가 만들고 싶은 것을 계속 만들고 있었어요.</strong></p>
+  <p>반복 사용자가 없었고, 저도 문제에 대한 확신을 잃었어요. 기능을 더 얹어서 풀릴 문제가 아니라고 판단해 종료했어요.</p>
 
   <h2>남은 것</h2>
+  <p><strong>개인의 페인 포인트와 조직의 도입 결정은 다른 것이었어요.</strong> 30명이 각자의 불편을 말했다고 해서, 그 불편을 다 합친 제품을 원하는 건 아니었죠. 기능이 늘어날수록 제품의 가치가 커지는 게 아니라 <strong>사용자가 감당할 학습 비용과 전환 비용이 함께 커졌어요.</strong></p>
 
-  <ul class="points">
-    <li data-reveal>
-      <strong>설문의 표본이 곧 의사결정의 범위다</strong>
-      사용자 79%는 확보했지만 공급자 데이터 없이 핵심 차별점을 정했고, 그 공백이 입점 전환율로 돌아왔어요. 이후 플랫폼을 볼 때는 공급자의 작업량·기대 수익·전환 비용을 함께 확인해요.
-    </li>
-    <li data-reveal>
-      <strong>성장 지표보다 단위 경제성이 먼저다</strong>
-      거래 한 건이 얼마의 수익과 비용을 만드는지, 규모가 커지면 구조가 나아지는지를 먼저 봐요.
-    </li>
-    <li data-reveal>
-      <strong>실험 전에 종료 기준을 함께 적는다</strong>
-      떠리에서는 결과를 보고 나서 판단했어요. 기준선이 없으면 어떤 숫자에도 "조금만 더"를 붙일 수 있어요. 지금은 성공 기준과 종료 기준을 같이 적고 실험을 시작해요.
-    </li>
-  </ul>
+  <div class="note-panel" data-reveal>
+    <ol>
+      <li>필요하다는 <strong>말</strong>보다, 실제로 <strong>비용을 감수하는 행동</strong>을 봅니다</li>
+      <li>기능의 가치만큼, 도입을 막는 <strong>전환 비용</strong>도 함께 계산합니다</li>
+    </ol>
+  </div>
 
+  <p>그래서 지금은 순서를 바꿔 봐요. <strong>기술적으로 만들 수 있는지보다, 누가 왜 반드시 써야 하는지를 먼저 확인해요.</strong> 이 검증이 없으면 잘 만든 제품도 쓰이지 않는다는 걸, 6개월을 들여 배웠어요.</p>
 
   <div class="links" data-reveal>
-    <span class="lk">떠리</span>
+    <span class="lk">프로젝트</span>
     <ul>
-      <li><a href="https://www.thurry.com/" target="_blank" rel="noopener">서비스<svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.6 9.4L9.4 2.6M3.9 2.6h5.5v5.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
-      <li><a href="https://github.com/youngbin03/thurry-client" target="_blank" rel="noopener">GitHub<svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.6 9.4L9.4 2.6M3.9 2.6h5.5v5.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+      <li><a href="https://clip-web.vercel.app/" target="_blank" rel="noopener">서비스<svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.6 9.4L9.4 2.6M3.9 2.6h5.5v5.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+      <li><a href="https://github.com/youngbin03/clip-landing" target="_blank" rel="noopener">GitHub<svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.6 9.4L9.4 2.6M3.9 2.6h5.5v5.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
     </ul>
   </div>
 
-  <a class="nextup" href="clip.html">
-    <span><span class="k">이어지는 글</span><span class="v">기능을 더하면 사람들이 쓸까?</span></span>
+  <a class="nextup" href="capacity.html">
+    <span><span class="k">다음 트랙</span><span class="v">안 되는 이유가 없는데 왜 아무도 안 했을까?</span></span>
     <svg width="8" height="14" viewBox="0 0 8 14" fill="none"><path d="M1 1l6 6-6 6" stroke="#8b95a1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
   </a>
 
