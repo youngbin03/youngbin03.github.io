@@ -203,6 +203,51 @@
     .nextup .v{font-size:16px;}
   }
 
+  /* ---------- summary block (요약 · 기간 · 팀 · 역할) ---------- */
+  .byline .sum{
+    font-size:17px;line-height:1.75;color:var(--body);
+    word-break:keep-all;
+  }
+  .byline .meta{margin-top:24px;display:flex;flex-direction:column;gap:9px;}
+  .byline .meta > div{display:flex;gap:14px;font-size:15px;line-height:1.6;}
+  .byline .meta dt{flex:0 0 34px;color:var(--mute);}
+  .byline .meta dd{color:var(--sub);word-break:keep-all;}
+  @media (max-width:640px){
+    .byline .sum{font-size:16px;}
+    .byline .meta{margin-top:20px;gap:8px;}
+    .byline .meta > div{font-size:14px;}
+    .byline .meta dt{flex-basis:30px;}
+  }
+
+  /* ---------- 프로젝트 링크 ---------- */
+  .links{
+    margin:56px 20px 0;padding-top:26px;
+    border-top:1px solid #e8ebee;
+  }
+  .links .lk{font-size:13px;color:var(--mute);letter-spacing:.02em;}
+  .links ul{
+    margin-top:14px;list-style:none;
+    display:flex;flex-wrap:wrap;gap:10px;
+  }
+  .links a{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:11px 17px;border-radius:12px;
+    border:1px solid #e8ebee;background:var(--bg);
+    font-size:15px;font-weight:600;color:var(--sub);
+    transition:border-color .3s,color .3s,background .3s;
+  }
+  .links a:hover{border-color:#dfe3e8;color:var(--ink);background:var(--panel);}
+  .links a .u{font-weight:500;color:var(--mute);font-size:14px;}
+  .links a:hover .u{color:var(--sub);}
+  .links a svg{flex-shrink:0;opacity:.55;transition:transform .3s,opacity .3s;}
+  .links a:hover svg{transform:translate(2px,-2px);opacity:.9;}
+  @media (max-width:640px){
+    .links{margin:44px 0 0;}
+    .links ul{gap:8px;}
+    .links a{padding:10px 14px;font-size:14px;}
+    .links a .u{display:none;}
+  }
+
   /* ---------- reveal ---------- */
   html.js [data-reveal]{opacity:0;transform:translateY(24px);}
   html.js [data-reveal].is-in{
@@ -225,8 +270,12 @@
   <h1>모두가 공감하는 문제,<br>정말 만들어야 할까?</h1>
   <div class="tags"><span class="tag">#문제정의</span><span class="tag">#안정성</span><span class="tag">#3인팀</span></div>
   <div class="byline">
-    <div class="date">2024.02 – 2024.09</div>
-    <div class="role">기획 · UI/UX 디자인 · 클라이언트 개발 · 홍보 역할</div>
+    <p class="sum">매일 마주치던 불편을 직접 제품으로 만들어, 만든 것이 실제로 쓰인다는 걸 처음 확인한 프로젝트</p>
+    <dl class="meta">
+      <div><dt>기간</dt><dd>2024.02 – 2024.09 (7개월)</dd></div>
+      <div><dt>팀</dt><dd>3인 팀</dd></div>
+      <div><dt>역할</dt><dd>기획 · UI/UX 디자인 · 클라이언트 개발 · 데이터 수집 · 홍보</dd></div>
+    </dl>
   </div>
   <div class="metrics">
     <div><div class="k">누적 이용자</div><div class="v">2,500명</div></div>
@@ -266,12 +315,20 @@
 
   <h2>광고 대신 저장할 만한 콘텐츠</h2>
   <p>광고 예산이 없어서 <strong>학생들이 이미 모여 있는 채널</strong>만 골랐어요.</p>
-  <p>축제기획단 활동을 하며 알게 된 한대신문 관계자에게 직접 연락해 교내 매체에 실렸어요. 에브리타임에는 앱 홍보 대신 <strong>‘한양대 생활 꿀팁’</strong> 콘텐츠를 만들고 그 안에 앱을 추천 중 하나로 끼워 넣었고요. 그 게시물이 <strong>스크랩 약 800회</strong>를 기록하며 유입의 대부분을 만들었습니다.</p>
+  <p>축제기획단 활동을 하며 알게 된 한대신문 관계자에게 직접 연락해 교내 매체에 실렸어요. 에브리타임에는 앱 홍보 대신 <strong>‘한양대 생활 꿀팁’</strong> 콘텐츠를 만들고 그 안에 앱을 추천 중 하나로 끼워 넣었고요. 그 게시물이 <strong>스크랩 약 800회</strong>를 기록하며 유입의 대부분을 만들었어요.</p>
   <p>이후로는 만드는 단계에서부터 유저가 우리 서비스를 <strong>어떤 경로로 접하게 될지</strong>를 같이 설계하게 됐어요.</p>
 
   <h2>남은 것</h2>
   <p>3년 뒤 학교가 공식 학식 인터페이스를 제공하면서 역할을 마쳤어요.</p>
   <p>유지되지 못한 걸 실패로 보진 않아요. 저희가 찾은 문제가 실제로 존재했고, <strong>학교가 공식적으로 같은 문제를 해결했다는 게 문제 선택이 옳았다는 증거</strong>이기도 하니까요.</p>
+
+  <div class="links" data-reveal>
+    <span class="lk">오늘의 식냥</span>
+    <ul>
+      <li><a href="https://www.dailyhyumeal.com/" target="_blank" rel="noopener">서비스<svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.6 9.4L9.4 2.6M3.9 2.6h5.5v5.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+      <li><a href="https://github.com/youngbin03/daily-hyu-menu-frontend" target="_blank" rel="noopener">GitHub<svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.6 9.4L9.4 2.6M3.9 2.6h5.5v5.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+    </ul>
+  </div>
 
   <a class="nextup" href="thurry-build.html">
     <span><span class="k">다음 글</span><span class="v">완성된 제품 없이 수요를 증명할 수 있을까?</span></span>

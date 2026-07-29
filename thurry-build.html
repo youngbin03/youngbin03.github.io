@@ -203,6 +203,51 @@
     .nextup .v{font-size:16px;}
   }
 
+  /* ---------- summary block (요약 · 기간 · 팀 · 역할) ---------- */
+  .byline .sum{
+    font-size:17px;line-height:1.75;color:var(--body);
+    word-break:keep-all;
+  }
+  .byline .meta{margin-top:24px;display:flex;flex-direction:column;gap:9px;}
+  .byline .meta > div{display:flex;gap:14px;font-size:15px;line-height:1.6;}
+  .byline .meta dt{flex:0 0 34px;color:var(--mute);}
+  .byline .meta dd{color:var(--sub);word-break:keep-all;}
+  @media (max-width:640px){
+    .byline .sum{font-size:16px;}
+    .byline .meta{margin-top:20px;gap:8px;}
+    .byline .meta > div{font-size:14px;}
+    .byline .meta dt{flex-basis:30px;}
+  }
+
+  /* ---------- 프로젝트 링크 ---------- */
+  .links{
+    margin:56px 20px 0;padding-top:26px;
+    border-top:1px solid #e8ebee;
+  }
+  .links .lk{font-size:13px;color:var(--mute);letter-spacing:.02em;}
+  .links ul{
+    margin-top:14px;list-style:none;
+    display:flex;flex-wrap:wrap;gap:10px;
+  }
+  .links a{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:11px 17px;border-radius:12px;
+    border:1px solid #e8ebee;background:var(--bg);
+    font-size:15px;font-weight:600;color:var(--sub);
+    transition:border-color .3s,color .3s,background .3s;
+  }
+  .links a:hover{border-color:#dfe3e8;color:var(--ink);background:var(--panel);}
+  .links a .u{font-weight:500;color:var(--mute);font-size:14px;}
+  .links a:hover .u{color:var(--sub);}
+  .links a svg{flex-shrink:0;opacity:.55;transition:transform .3s,opacity .3s;}
+  .links a:hover svg{transform:translate(2px,-2px);opacity:.9;}
+  @media (max-width:640px){
+    .links{margin:44px 0 0;}
+    .links ul{gap:8px;}
+    .links a{padding:10px 14px;font-size:14px;}
+    .links a .u{display:none;}
+  }
+
   /* ---------- reveal ---------- */
   html.js [data-reveal]{opacity:0;transform:translateY(24px);}
   html.js [data-reveal].is-in{
@@ -223,10 +268,14 @@
 
 <header class="container article-head">
   <h1>제품 없이 수요를<br>증명할 수 있을까? | 떠리 #1</h1>
-  <div class="tags"><span class="tag">#수요검증</span><span class="tag">#공동창업</span><span class="tag">#결제시스템</span></div>
+  <div class="tags"><span class="tag">#수요검증</span><span class="tag">#공동창업</span><span class="tag">#요구사항정의</span></div>
   <div class="byline">
-    <div class="date">2025.02 – 2025.09</div>
-    <div class="role">공동창업 · 5인 개발 팀 리드 · UI/UX · 제품 사용자 경험 설계 역할</div>
+    <p class="sum">동네에서 매일 버려지는 빵을 친구들과 사업으로 만들어보며, 제품 없이 시장부터 두드린 창업기</p>
+    <dl class="meta">
+      <div><dt>기간</dt><dd>2025.02 – 2025.09 (8개월 · 개발 2개월 + 운영 6개월)</dd></div>
+      <div><dt>팀</dt><dd>5인 공동창업 팀</dd></div>
+      <div><dt>역할</dt><dd>공동창업 · 개발 팀 리드 · UI/UX · 사용자 경험 설계</dd></div>
+    </dl>
   </div>
   <div class="metrics">
     <div><div class="k">오픈채팅 사전 검증</div><div class="v">300명</div></div>
@@ -268,14 +317,15 @@
 
   <p>책상에서 화면부터 그렸다면 전부 놓쳤을 문제들이에요. 초기 제품에서는 기능을 상상하기보다, <strong>먼저 수작업으로 거래를 성사시켜보는 게</strong> 더 정확한 요구사항을 만들 수 있다는 걸 알게 되었죠.</p>
 
-  <h2>결제를 붙이는 것부터 관문이었어요</h2>
+  <h2>돈은 빠졌는데 예약이 없으면 안 되니까요</h2>
   <p>실제 결제를 받기 위한 <strong>PG 계약과 심사에는 사업자가 필요했어요.</strong> 사업자등록부터 결제 연동까지, 학생 다섯 명이 고객의 돈을 받을 수 있는 상태를 만드는 데만 몇 주가 걸렸죠.</p>
-  <p>연동 자체는 결제위젯이 대부분 해결해줬어요. 카드든 간편결제든 같은 흐름으로 돌아오니까요. 제가 정한 건 하나였어요. <strong>승인은 서버에서만 호출하고, 승인이 성공했을 때만 예약을 생성</strong>하는 것. "돈은 빠졌는데 예약이 없는" 상태를 구조적으로 막기 위해서였습니다.</p>
+  <p>연동 자체는 결제위젯이 대부분 해결해줬어요. 카드든 간편결제든 같은 흐름으로 돌아오니까요. 제가 정한 건 하나였어요. <strong>승인은 서버에서만 호출하고, 승인이 성공했을 때만 예약을 생성</strong>하는 것. "돈은 빠졌는데 예약이 없는" 상태를 구조적으로 막기 위해서였어요.</p>
   <p>진짜 예외는 <strong>0원 결제</strong>였어요. <strong>토스페이먼츠의 최소 결제 금액은 100원</strong>이라, 전액 할인 상품은 PG를 태울 수가 없거든요. 여기서 예약 생성·재고 차감·환불 복구를 따로 짜면, 같은 일을 하는 코드가 두 군데로 갈라지게 돼요.</p>
   <p>그래서 0원 주문에는 <strong>ZERO_PAYMENT_</strong> 키를 붙여 <strong>PG 승인 구간만 건너뛰고 나머지는 유료 결제와 똑같이 통과</strong>하게 했어요.</p>
 
   <figure class="media" data-reveal>
     <img src="reference/thurry-payment-flow.svg" alt="">
+    <figcaption class="caption">팀이 같은 그림을 보게 하려고 결제·예약 흐름을 한 장으로 정리했어요</figcaption>
   </figure>
 
 
@@ -302,11 +352,19 @@
   <p>작업 지시서는 길어졌지만 <strong>통합 단계에서 터지는 일이 사라졌어요.</strong> 지금 회사에서 PoC를 설계할 때도 화면보다 데이터 흐름과 실패 조건을 먼저 적는 습관이 생겼어요.</p>
 
   <h2>알림은 손으로 먼저 보내봤어요</h2>
-  <p>리텐션을 올릴 방법을 찾아야 했어요. 그런데 알림 시스템부터 만들지는 않았어요. <strong>며칠 동안 직접 손으로 메시지를 보냈습니다.</strong></p>
+  <p>리텐션을 올릴 방법을 찾아야 했어요. 그런데 알림 시스템부터 만들지는 않았어요. <strong>며칠 동안 직접 손으로 메시지를 보냈어요.</strong></p>
   <p>이전에 소금빵을 산 사람에게 "오늘 소금빵 3개 남았어요"를 보내고, 마감 30분 전에 근처 사용자에게 알렸어요. 문구와 시점을 바꿔가며 어떤 조합이 실제 픽업으로 이어지는지 봤죠.</p>
-  <p>반응이 갈린 지점은 명확했어요. 일반 홍보 알림은 무시됐지만, <strong>이미 관심을 보인 상품과 지금 살 수 있는 시점을 연결한 알림</strong>은 달랐습니다. 이 조합만 자동화했더니 <strong>구매가 1.8배</strong>로 늘었어요.</p>
+  <p>반응이 갈린 지점은 명확했어요. 일반 홍보 알림은 무시됐지만, <strong>이미 관심을 보인 상품과 지금 살 수 있는 시점을 연결한 알림</strong>은 달랐죠. 이 조합만 자동화했더니 <strong>구매가 1.8배</strong>로 늘었어요.</p>
   <p>여기에 <strong>즐겨찾기</strong>를 붙였어요. 처음 앱을 연 사용자가 주변 매장을 둘러보며 자연스럽게 즐겨찾기를 남기도록 온보딩을 설계했고요.</p>
   <p>알림이 통하려면 <strong>먼저 관심 신호가 있어야 했거든요.</strong> 사용자가 직접 알림받을 대상을 만들어두게 한 셈이에요.</p>
+
+  <div class="links" data-reveal>
+    <span class="lk">떠리</span>
+    <ul>
+      <li><a href="https://www.thurry.com/" target="_blank" rel="noopener">서비스<svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.6 9.4L9.4 2.6M3.9 2.6h5.5v5.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+      <li><a href="https://github.com/youngbin03/thurry-client" target="_blank" rel="noopener">GitHub<svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.6 9.4L9.4 2.6M3.9 2.6h5.5v5.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+    </ul>
+  </div>
 
   <a class="nextup" href="thurry-end.html">
     <span><span class="k">이어지는 글</span><span class="v">무료로 줘도 모이지 않는다면?</span></span>

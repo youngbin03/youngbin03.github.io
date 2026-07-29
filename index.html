@@ -62,8 +62,8 @@
     100%{transform:translateY(-44px);}
   }
   @media (prefers-reduced-motion:reduce){nav .logo-slide{animation:none;}}
-  nav .menu{display:flex;flex-direction:column;gap:7px;background:none;border:none;cursor:pointer;padding:6px 2px;}
-  nav .menu span{display:block;width:26px;height:2px;background:var(--text);border-radius:2px;}
+  nav .menu{display:flex;flex-direction:column;align-items:flex-end;gap:6px;background:none;border:none;cursor:pointer;padding:6px 2px;}
+  nav .menu span{display:block;width:20px;height:2px;background:var(--text);border-radius:2px;}
 
   .container{max-width:var(--container);margin:0 auto;padding:0 clamp(24px,10vw,150px);}
 
@@ -329,6 +329,18 @@
   .qcard.soon:hover::before{opacity:0;}
   .qcard.soon:hover .tag{background:#fff;color:var(--text-2);}
   .qcard .soon-badge{font-size:15px;color:var(--text-3);}
+  /* 준비 중 카드 — 글은 없지만 실물 링크는 열어둠 */
+  .soon-links{position:relative;margin-top:14px;display:flex;gap:8px;}
+  .soon-links a{
+    display:inline-flex;align-items:center;gap:6px;
+    padding:7px 13px;border-radius:9px;
+    border:1px solid var(--line);background:var(--bg);
+    font-size:13px;font-weight:600;color:var(--text-2);
+    transition:border-color .3s,color .3s;
+  }
+  .soon-links a:hover{border-color:var(--line-2);color:var(--text);}
+  .soon-links a svg{opacity:.55;transition:transform .3s;}
+  .soon-links a:hover svg{transform:translate(2px,-2px);opacity:.9;}
 
   /* track accents */
   .t1{--accent:var(--track1);}
@@ -487,7 +499,7 @@
     </a>
     <a class="qcard" href="thurry-build.html" data-reveal style="--d:.1s">
       <h3>제품 없이 수요를<br>증명할 수 있을까?</h3>
-      <div class="tags"><span class="tag">수요검증</span><span class="tag">결제시스템</span></div>
+      <div class="tags"><span class="tag">수요검증</span><span class="tag">요구사항정의</span></div>
       <div class="foot">
         <span class="who">떠리</span>
         <span class="meta"><span class="time">4분</span> <svg width="8" height="14" viewBox="0 0 8 14" fill="none"><path d="M1 1l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
@@ -506,7 +518,11 @@
       <div class="tags"><span class="tag">진입장벽</span><span class="tag">AI채팅</span></div>
       <div class="foot">
         <span class="who">CLIP</span>
-        <span class="meta"><span class="soon-badge">준비 중</span></span>
+        <span class="meta"><span class="soon-badge">글 준비 중</span></span>
+      </div>
+      <div class="soon-links">
+        <a href="https://clip-web.vercel.app/" target="_blank" rel="noopener">서비스<svg width="10" height="10" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.6 9.4L9.4 2.6M3.9 2.6h5.5v5.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a href="https://github.com/youngbin03/clip-landing" target="_blank" rel="noopener">GitHub<svg width="10" height="10" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.6 9.4L9.4 2.6M3.9 2.6h5.5v5.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       </div>
     </div>
   </div>
