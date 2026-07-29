@@ -1,6 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1160 820" width="1160" height="820" role="img" aria-labelledby="t d">
-<title id="t">예약이 만들어지는 조건</title>
-<desc id="d">구매자·앱·서버·토스페이먼츠 4개 주체의 결제 흐름. 승인에 성공한 경우에만 예약과 재고 차감이 실행되고, 실패하면 아무것도 만들지 않습니다. 전액할인 0원 결제는 결제창 호출부터 승인 결과까지의 PG 구간을 건너뛰고 같은 경로로 합류합니다.</desc>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1160 880" width="1160" height="880" role="img" aria-labelledby="t d">
+<title id="t">예약이 확정되는 조건</title>
+<desc id="d">구매자·앱·서버·토스페이먼츠 4개 주체의 결제 흐름. 예약은 결제 요청 시점에 대기 상태로 먼저 만들고, 서버가 승인 성공을 확인했을 때만 확정하며 재고를 차감합니다. 전액할인 0원 결제는 결제창 호출부터 승인 결과까지의 PG 구간을 건너뛰고 같은 경로로 합류합니다.</desc>
 <defs>
   <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
     <path d="M0 0.5L9 5L0 9.5z" fill="#C4CAD2"/>
@@ -23,10 +23,10 @@
   .skip{fill:#F7FAFF;stroke:#3182F6;stroke-width:1.4;stroke-dasharray:6 5}
 </style>
 
-<rect width="1160" height="820" fill="#FFFFFF"/>
+<rect width="1160" height="880" fill="#FFFFFF"/>
 
-<text class="h1" x="60" y="56">예약이 만들어지는 조건</text>
-<text class="sub" x="60" y="84">승인에 성공한 경우에만 예약을 만들고, 0원 결제는 PG 구간을 건너뜁니다</text>
+<text class="h1" x="60" y="56">예약이 확정되는 조건</text>
+<text class="sub" x="60" y="84">예약은 대기 상태로 먼저 만들고, 승인에 성공했을 때만 확정합니다</text>
 
 <rect class="skip" x="60" y="100" width="34" height="16" rx="5"/>
 <text class="lgd" x="104" y="113">점선 구간은 전액할인(0원) 결제에서 실행되지 않습니다</text>
@@ -40,47 +40,51 @@
 <rect x="916" y="146" width="168" height="38" rx="19" fill="#F2F4F6"/>
 <text class="lane" x="1000" y="171" text-anchor="middle">토스페이먼츠</text>
 
-<line class="life" x1="130" y1="196" x2="130" y2="750"/>
-<line class="life" x1="400" y1="196" x2="400" y2="750"/>
-<line class="life" x1="690" y1="196" x2="690" y2="750"/>
-<line class="life" x1="1000" y1="196" x2="1000" y2="750"/>
+<line class="life" x1="130" y1="196" x2="130" y2="800"/>
+<line class="life" x1="400" y1="196" x2="400" y2="800"/>
+<line class="life" x1="690" y1="196" x2="690" y2="800"/>
+<line class="life" x1="1000" y1="196" x2="1000" y2="800"/>
 
-<rect class="skip" x="104" y="256" width="988" height="120" rx="14"/>
-<rect class="skip" x="664" y="448" width="428" height="84" rx="14"/>
+<rect class="skip" x="104" y="296" width="988" height="124" rx="14"/>
+<rect class="skip" x="664" y="488" width="428" height="84" rx="14"/>
 
 <text class="msg" x="265" y="228" text-anchor="middle">결제 요청</text>
 <line class="a" x1="136" y1="238" x2="394" y2="238"/>
 
-<text class="msg" x="700" y="276" text-anchor="middle">결제창 호출</text>
-<line class="a" x1="406" y1="286" x2="994" y2="286"/>
+<text class="msg" x="545" y="262" text-anchor="middle">예약 생성 · 대기 상태</text>
+<text class="msg2" x="545" y="280" text-anchor="middle">확정되기 전이라 재고는 아직 그대로</text>
+<line class="a" x1="406" y1="288" x2="684" y2="288"/>
 
-<text class="msg" x="565" y="316" text-anchor="middle">결제 수단 인증</text>
-<line class="a" x1="994" y1="326" x2="136" y2="326"/>
+<text class="msg" x="700" y="316" text-anchor="middle">결제창 호출</text>
+<line class="a" x1="406" y1="326" x2="994" y2="326"/>
 
-<text class="msg" x="700" y="356" text-anchor="middle">successUrl 이동 · paymentKey 전달</text>
-<line class="a" x1="994" y1="366" x2="406" y2="366"/>
+<text class="msg" x="565" y="356" text-anchor="middle">결제 수단 인증</text>
+<line class="a" x1="994" y1="366" x2="136" y2="366"/>
 
-<text class="msg" x="545" y="400" text-anchor="middle">승인 요청</text>
-<text class="msg2" x="545" y="418" text-anchor="middle">0원 주문은 ZERO_PAYMENT_ 키를 그대로 보냄</text>
-<line class="a" x1="406" y1="430" x2="684" y2="430"/>
+<text class="msg" x="700" y="396" text-anchor="middle">successUrl 이동 · paymentKey 전달</text>
+<line class="a" x1="994" y1="406" x2="406" y2="406"/>
 
-<text class="msg" x="878" y="468" text-anchor="middle">승인 API 요청</text>
-<line class="a" x1="696" y1="478" x2="994" y2="478"/>
+<text class="msg" x="545" y="442" text-anchor="middle">승인 요청</text>
+<text class="msg2" x="545" y="460" text-anchor="middle">0원 주문은 ZERO_PAYMENT_ 키를 그대로 보냄</text>
+<line class="a" x1="406" y1="470" x2="684" y2="470"/>
 
-<text class="msg" x="878" y="510" text-anchor="middle">승인 결과</text>
-<line class="a" x1="994" y1="520" x2="696" y2="520"/>
+<text class="msg" x="878" y="508" text-anchor="middle">승인 API 요청</text>
+<line class="a" x1="696" y1="518" x2="994" y2="518"/>
 
-<rect x="500" y="556" width="380" height="72" rx="16" fill="#E8F0FE"/>
-<text class="bx" x="690" y="586" text-anchor="middle">예약 생성 · 재고 차감</text>
-<text class="bxc" x="690" y="608" text-anchor="middle">승인에 성공했을 때만 실행</text>
+<text class="msg" x="878" y="552" text-anchor="middle">승인 결과</text>
+<line class="a" x1="994" y1="562" x2="696" y2="562"/>
 
-<rect x="500" y="644" width="380" height="72" rx="16" fill="#F2F4F6"/>
-<text class="gx" x="690" y="674" text-anchor="middle">아무것도 만들지 않음</text>
-<text class="gxc" x="690" y="696" text-anchor="middle">승인 실패 · 결제창 이탈 · 타임아웃</text>
+<rect x="500" y="596" width="380" height="72" rx="16" fill="#E8F0FE"/>
+<text class="bx" x="690" y="626" text-anchor="middle">예약 확정 · 재고 차감</text>
+<text class="bxc" x="690" y="648" text-anchor="middle">승인에 성공했을 때만 실행</text>
 
-<text class="msg" x="410" y="732" text-anchor="middle">결과 응답</text>
-<line class="a" x1="684" y1="742" x2="136" y2="742"/>
+<rect x="500" y="682" width="380" height="72" rx="16" fill="#F2F4F6"/>
+<text class="gx" x="690" y="712" text-anchor="middle">대기 예약 폐기</text>
+<text class="gxc" x="690" y="734" text-anchor="middle">승인 실패 · 결제창 이탈 · 타임아웃</text>
 
-<line x1="60" y1="774" x2="1100" y2="774" stroke="#E5E8EB" stroke-width="1"/>
-<text class="foot" x="60" y="798">결제 수단이 늘어도, 예약을 만들지 말지는 한 곳에서만 판단합니다</text>
+<text class="msg" x="410" y="786" text-anchor="middle">결과 응답</text>
+<line class="a" x1="684" y1="796" x2="136" y2="796"/>
+
+<line x1="60" y1="828" x2="1100" y2="828" stroke="#E5E8EB" stroke-width="1"/>
+<text class="foot" x="60" y="852">결제 수단이 늘어도, 예약을 확정할지는 한 곳에서만 판단합니다</text>
 </svg>
