@@ -4,12 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AI에게 자유를 주면 더 창의적일까? — 신영빈</title>
-<meta name="description" content="신영빈 포트폴리오 — 더 나은 정답보다, 더 나은 문제를 찾습니다.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="AI에게 자유를 주면 더 창의적일까? — 신영빈">
-<meta property="og:description" content="더 나은 정답보다, 더 나은 문제를 찾습니다.">
-<meta property="og:url" content="https://youngbin03.github.io/stencil.html">
-<meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <style>
   :root{
@@ -282,6 +276,22 @@
   @media (prefers-reduced-motion:reduce){
     html.js [data-reveal]{opacity:1;transform:none;transition:none;}
   }
+
+  /* ---------- fold (mobile 접기) ---------- */
+  .fold-btn{display:none;}
+  @media (max-width:640px){
+    .fold:not(.is-open) .fold-body{display:none;}
+    .fold-btn{
+      display:flex;align-items:center;justify-content:center;gap:6px;
+      width:100%;margin:28px 0 36px;padding:13px 20px;
+      border-radius:14px;border:none;background:var(--chip);
+      color:var(--sub);font:600 14px Pretendard,-apple-system,system-ui,sans-serif;
+      cursor:pointer;
+    }
+    .fold-btn svg{transition:transform .2s ease;}
+    .fold.is-open .fold-btn svg{transform:rotate(180deg);}
+  }
+  .fold-body [data-reveal]{opacity:1!important;transform:none!important;transition:none!important;}
 </style>
 </head>
 <body>
@@ -356,6 +366,8 @@
   </div>
 
 
+  <div class="fold" data-fold>
+  <div class="fold-body">
   <h2>잘 만드는 것보다, 망가지지 않게</h2>
   <p>품질 하한은 코드가 강제하게 했어요.</p>
 
@@ -369,6 +381,12 @@
   </div>
 
   <p>이 값들은 처음부터 정한 게 아니라 <strong>실패를 보고 거꾸로 다듬은 것</strong>이에요. 화면에서 안 읽히는 글씨를 발견할 때마다 최소 크기를 올렸고, 그 결과 하한이 <strong>12px에서 18px로</strong> 바뀌었어요. 규칙이 먼저가 아니라 실패가 먼저였죠.</p>
+  </div>
+  <button type="button" class="fold-btn" aria-expanded="false">
+    <span class="fold-btn-label">더 보기</span>
+    <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M1.5 3.5L5 7l3.5-3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+  </div>
 
   <h2>AI 평가는 아직 못 믿었어요</h2>
   <p>렌더링된 슬라이드를 AI가 채점하게 하는 것도 실험했어요. 그런데 <strong>사람이 보기엔 엉성한 결과를 AI가 높게 평가하는 경우</strong>가 반복됐어요.</p>
@@ -403,6 +421,14 @@ const io=new IntersectionObserver(es=>{
   es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('is-in');io.unobserve(e.target);}});
 },{threshold:.12});
 document.querySelectorAll('[data-reveal]').forEach(el=>io.observe(el));
+document.querySelectorAll('.fold-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const fold=btn.closest('.fold');
+    const open=fold.classList.toggle('is-open');
+    btn.setAttribute('aria-expanded',open?'true':'false');
+    btn.querySelector('.fold-btn-label').textContent=open?'접기':'더 보기';
+  });
+});
 </script>
 </body>
 </html>

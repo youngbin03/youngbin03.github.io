@@ -4,12 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>무료로 줘도 모이지 않는다면? — 신영빈</title>
-<meta name="description" content="신영빈 포트폴리오 — 더 나은 정답보다, 더 나은 문제를 찾습니다.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="무료로 줘도 모이지 않는다면? — 신영빈">
-<meta property="og:description" content="더 나은 정답보다, 더 나은 문제를 찾습니다.">
-<meta property="og:url" content="https://youngbin03.github.io/thurry-end.html">
-<meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <style>
   :root{
@@ -257,6 +251,22 @@
   @media (prefers-reduced-motion:reduce){
     html.js [data-reveal]{opacity:1;transform:none;transition:none;}
   }
+
+  /* ---------- fold (mobile 접기) ---------- */
+  .fold-btn{display:none;}
+  @media (max-width:640px){
+    .fold:not(.is-open) .fold-body{display:none;}
+    .fold-btn{
+      display:flex;align-items:center;justify-content:center;gap:6px;
+      width:100%;margin:28px 0 36px;padding:13px 20px;
+      border-radius:14px;border:none;background:var(--chip);
+      color:var(--sub);font:600 14px Pretendard,-apple-system,system-ui,sans-serif;
+      cursor:pointer;
+    }
+    .fold-btn svg{transition:transform .2s ease;}
+    .fold.is-open .fold-btn svg{transform:rotate(180deg);}
+  }
+  .fold-body [data-reveal]{opacity:1!important;transform:none!important;transition:none!important;}
 </style>
 </head>
 <body>
@@ -298,6 +308,8 @@
   <p>근거는 사전 설문이었어요. 오픈채팅방 학생 <strong>170명 중 134명(약 79%)</strong>이 개별 상품을 선호했거든요. 원하는 것만 살 수 있고 최소 결제 금액도 낮으니 구매 장벽이 내려간다고 판단했죠.</p>
   <p><strong>그런데 이 설문에 사장님 응답은 없었어요.</strong> 표본이 적어서 분석에서 뺐거든요. 사용자 79%는 확보하고, <strong>같은 방식을 매일 운영해야 하는 쪽의 데이터 없이</strong> 핵심 차별점을 정한 거예요.</p>
 
+  <div class="fold" data-fold>
+  <div class="fold-body">
   <h2>72곳이 거절한 이유를 들었어요</h2>
   <p>앱을 출시하려면 팔 상품이 필요했어요. 성동구 베이커리를 <strong>하루 약 다섯 곳씩 한 달, 총 80곳 이상</strong> 방문했죠. 그렇게 넉 달에 걸쳐 <strong>8곳</strong>이 입점했어요.</p>
   <p>처음엔 남는 빵을 팔아준다니 당연히 좋아하실 거라 생각했어요. 그래서 <strong>거절을 영업 능력 부족으로 읽었어요.</strong> 더 잘 준비해서 가면 되는 문제라고요.</p>
@@ -315,6 +327,12 @@
   <h3>4) 기대보다 낮은 경제적 효용</h3>
   <p>일부 매장은 남는 빵을 직원에게 주거나 기부하고 계셨어요. 이미 처리 방법이 있으니 적은 금액을 벌자고 일을 늘릴 이유가 없었던 거죠.</p>
   <p>사장님이 원한 건 폐기 비용 절감이 아니었어요. <strong>새로운 손님의 방문과 재구매</strong>였죠. 결국 공급자가 원한 건 할인 판매 기능이 아니라 실질적인 구매력과 홍보 효과였어요.</p>
+  </div>
+  <button type="button" class="fold-btn" aria-expanded="false">
+    <span class="fold-btn-label">더 보기</span>
+    <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M1.5 3.5L5 7l3.5-3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+  </div>
 
   <h2>사용자에게 좋은 게 시장에 좋은 건 아니었어요</h2>
   <p>여기서 앞의 설문이 돌아왔어요. 개별 상품 선택은 사용자 79%가 선호한 방식이지만, 사장님은 <strong>상품마다 마감할 수량을 매일 등록</strong>해야 했어요.</p>
@@ -414,6 +432,14 @@ const io=new IntersectionObserver(es=>{
   es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('is-in');io.unobserve(e.target);}});
 },{threshold:.12});
 document.querySelectorAll('[data-reveal]').forEach(el=>io.observe(el));
+document.querySelectorAll('.fold-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const fold=btn.closest('.fold');
+    const open=fold.classList.toggle('is-open');
+    btn.setAttribute('aria-expanded',open?'true':'false');
+    btn.querySelector('.fold-btn-label').textContent=open?'접기':'더 보기';
+  });
+});
 </script>
 </body>
 </html>

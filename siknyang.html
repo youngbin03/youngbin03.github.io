@@ -4,12 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>모두가 공감하는 문제, 정말 만들어야 할까? — 신영빈</title>
-<meta name="description" content="신영빈 포트폴리오 — 더 나은 정답보다, 더 나은 문제를 찾습니다.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="모두가 공감하는 문제, 정말 만들어야 할까? — 신영빈">
-<meta property="og:description" content="더 나은 정답보다, 더 나은 문제를 찾습니다.">
-<meta property="og:url" content="https://youngbin03.github.io/siknyang.html">
-<meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <style>
   :root{
@@ -257,6 +251,22 @@
   @media (prefers-reduced-motion:reduce){
     html.js [data-reveal]{opacity:1;transform:none;transition:none;}
   }
+
+  /* ---------- fold (mobile 접기) ---------- */
+  .fold-btn{display:none;}
+  @media (max-width:640px){
+    .fold:not(.is-open) .fold-body{display:none;}
+    .fold-btn{
+      display:flex;align-items:center;justify-content:center;gap:6px;
+      width:100%;margin:28px 0 36px;padding:13px 20px;
+      border-radius:14px;border:none;background:var(--chip);
+      color:var(--sub);font:600 14px Pretendard,-apple-system,system-ui,sans-serif;
+      cursor:pointer;
+    }
+    .fold-btn svg{transition:transform .2s ease;}
+    .fold.is-open .fold-btn svg{transform:rotate(180deg);}
+  }
+  .fold-body [data-reveal]{opacity:1!important;transform:none!important;transition:none!important;}
 </style>
 </head>
 <body>
@@ -312,10 +322,18 @@
 
   <p>통제할 수 없는 데이터가 있다면 완벽한 해결을 기다리기보다 <strong>불확실성을 줄이는 대안</strong>을 내는 법을 배울 수 있었어요.</p>
 
+  <div class="fold" data-fold>
+  <div class="fold-body">
   <h2>광고 대신 저장할 만한 콘텐츠</h2>
   <p>광고 예산이 없어서 <strong>학생들이 이미 모여 있는 채널</strong>만 골랐어요.</p>
   <p>축제기획단 활동을 하며 알게 된 한대신문 관계자에게 직접 연락해 교내 매체에 실렸어요. 에브리타임에는 앱 홍보 대신 <strong>‘한양대 생활 꿀팁’</strong> 콘텐츠를 만들고 그 안에 앱을 추천 중 하나로 끼워 넣었고요. 그 게시물이 <strong>스크랩 약 800회</strong>를 기록하며 유입의 대부분을 만들었어요.</p>
   <p>이후로는 만드는 단계에서부터 유저가 우리 서비스를 <strong>어떤 경로로 접하게 될지</strong>를 같이 설계하게 됐어요.</p>
+  </div>
+  <button type="button" class="fold-btn" aria-expanded="false">
+    <span class="fold-btn-label">더 보기</span>
+    <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M1.5 3.5L5 7l3.5-3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+  </div>
 
   <h2>남은 것</h2>
   <p>3년 뒤 학교가 공식 학식 인터페이스를 제공하면서 역할을 마쳤어요.</p>
@@ -347,6 +365,14 @@ const io=new IntersectionObserver(es=>{
   es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('is-in');io.unobserve(e.target);}});
 },{threshold:.12});
 document.querySelectorAll('[data-reveal]').forEach(el=>io.observe(el));
+document.querySelectorAll('.fold-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const fold=btn.closest('.fold');
+    const open=fold.classList.toggle('is-open');
+    btn.setAttribute('aria-expanded',open?'true':'false');
+    btn.querySelector('.fold-btn-label').textContent=open?'접기':'더 보기';
+  });
+});
 </script>
 </body>
 </html>

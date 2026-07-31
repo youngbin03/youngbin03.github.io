@@ -4,12 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>제품 없이 수요를 증명할 수 있을까? — 신영빈</title>
-<meta name="description" content="신영빈 포트폴리오 — 더 나은 정답보다, 더 나은 문제를 찾습니다.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="제품 없이 수요를 증명할 수 있을까? — 신영빈">
-<meta property="og:description" content="더 나은 정답보다, 더 나은 문제를 찾습니다.">
-<meta property="og:url" content="https://youngbin03.github.io/thurry-build.html">
-<meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <style>
   :root{
@@ -257,6 +251,22 @@
   @media (prefers-reduced-motion:reduce){
     html.js [data-reveal]{opacity:1;transform:none;transition:none;}
   }
+
+  /* ---------- fold (mobile 접기) ---------- */
+  .fold-btn{display:none;}
+  @media (max-width:640px){
+    .fold:not(.is-open) .fold-body{display:none;}
+    .fold-btn{
+      display:flex;align-items:center;justify-content:center;gap:6px;
+      width:100%;margin:28px 0 36px;padding:13px 20px;
+      border-radius:14px;border:none;background:var(--chip);
+      color:var(--sub);font:600 14px Pretendard,-apple-system,system-ui,sans-serif;
+      cursor:pointer;
+    }
+    .fold-btn svg{transition:transform .2s ease;}
+    .fold.is-open .fold-btn svg{transform:rotate(180deg);}
+  }
+  .fold-body [data-reveal]{opacity:1!important;transform:none!important;transition:none!important;}
 </style>
 </head>
 <body>
@@ -302,6 +312,8 @@
   <p>접근성이 좋았던 한양대 베이커리 사장님께 설명드리고 동의를 얻었어요. 그리고 <strong>앱부터 만들지 않았어요.</strong> 포스터와 카카오톡 오픈채팅방, 엑셀 시트 하나로 한 달을 운영했어요.</p>
   <p>오픈채팅방에는 <strong>300명</strong>이 모였어요. 매일 30개 정도 빵이 남았고 그중 10~15개가 팔렸어요. 하루 약 5만 원, 월 100만 원 규모였죠. 완성된 제품 없이도 사람이 모이고 거래가 일어났어요.</p>
 
+  <div class="fold" data-fold>
+  <div class="fold-body">
   <h2>엑셀 시트가 기획서였어요</h2>
   <p>사용자가 오픈채팅으로 주문을 보내면 엑셀에서 재고를 차감하고 합계를 계산해 안내했어요. 매장에 도착하면 주문 내역과 픽업 여부를 다시 확인했고요. 매일 마감 시간 내내 누군가는 매장에 붙어 있어야 했고, 당연히 비효율적이었어요.</p>
   <p>그러나 이 과정에서 <strong>제품이 풀어야 할 문제가 저절로 드러났어요.</strong></p>
@@ -316,6 +328,12 @@
   </div>
 
   <p>책상에서 화면부터 그렸다면 전부 놓쳤을 문제들이에요. 초기 제품에서는 기능을 상상하기보다, <strong>먼저 수작업으로 거래를 성사시켜보는 게</strong> 더 정확한 요구사항을 만들 수 있다는 걸 알게 되었죠.</p>
+  </div>
+  <button type="button" class="fold-btn" aria-expanded="false">
+    <span class="fold-btn-label">더 보기</span>
+    <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M1.5 3.5L5 7l3.5-3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+  </div>
 
   <h2>앱이 결제됐다고 말하면, 믿어도 될까요</h2>
   <p>실제 결제를 받기 위한 <strong>PG 계약과 심사에는 사업자가 필요했어요.</strong> 사업자등록부터 결제 연동까지, 학생 다섯 명이 고객의 돈을 받을 수 있는 상태를 만드는 데만 몇 주가 걸렸죠.</p>
@@ -386,6 +404,14 @@ const io=new IntersectionObserver(es=>{
   es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('is-in');io.unobserve(e.target);}});
 },{threshold:.12});
 document.querySelectorAll('[data-reveal]').forEach(el=>io.observe(el));
+document.querySelectorAll('.fold-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const fold=btn.closest('.fold');
+    const open=fold.classList.toggle('is-open');
+    btn.setAttribute('aria-expanded',open?'true':'false');
+    btn.querySelector('.fold-btn-label').textContent=open?'접기':'더 보기';
+  });
+});
 </script>
 </body>
 </html>

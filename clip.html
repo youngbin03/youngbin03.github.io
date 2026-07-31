@@ -4,12 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>기능을 더하면 사람들이 쓸까? — 신영빈</title>
-<meta name="description" content="신영빈 포트폴리오 — 더 나은 정답보다, 더 나은 문제를 찾습니다.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="기능을 더하면 사람들이 쓸까? — 신영빈">
-<meta property="og:description" content="더 나은 정답보다, 더 나은 문제를 찾습니다.">
-<meta property="og:url" content="https://youngbin03.github.io/clip.html">
-<meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <style>
   :root{
@@ -267,6 +261,22 @@
   @media (prefers-reduced-motion:reduce){
     html.js [data-reveal]{opacity:1;transform:none;transition:none;}
   }
+
+  /* ---------- fold (mobile 접기) ---------- */
+  .fold-btn{display:none;}
+  @media (max-width:640px){
+    .fold:not(.is-open) .fold-body{display:none;}
+    .fold-btn{
+      display:flex;align-items:center;justify-content:center;gap:6px;
+      width:100%;margin:28px 0 36px;padding:13px 20px;
+      border-radius:14px;border:none;background:var(--chip);
+      color:var(--sub);font:600 14px Pretendard,-apple-system,system-ui,sans-serif;
+      cursor:pointer;
+    }
+    .fold-btn svg{transition:transform .2s ease;}
+    .fold.is-open .fold-btn svg{transform:rotate(180deg);}
+  }
+  .fold-body [data-reveal]{opacity:1!important;transform:none!important;transition:none!important;}
 </style>
 </head>
 <body>
@@ -302,6 +312,8 @@
   <p>문제를 구체화하려고 <strong>운영진 약 30명을 인터뷰했어요.</strong> 재무 담당자는 매번 참여자를 확인하고 정산하는 게 어렵다고 했고, 공지 담당자는 누가 읽었는지 빠르게 알고 싶어 했어요. 일정 관리, 출석, 과제 제출, 회원 관리까지 담당 업무마다 다른 불편이 나왔고요.</p>
   <p>여기서 <strong>"문제는 분명히 있다"는 확신을 얻었어요.</strong> 그리고 그 확신이 다음 판단을 흐리게 만들었어요.</p>
 
+  <div class="fold" data-fold>
+  <div class="fold-body">
   <h2>각자의 불편을 다 풀려다 올인원이 됐어요</h2>
   <p>처음 만든 건 하나였어요. GPS로 뒤풀이 장소에 있던 사람을 판별해 <strong>정산 참여자를 자동으로 뽑는 기능</strong>이요. 그다음부터 인터뷰에서 나온 요구를 하나씩 얹었어요.</p>
   <p>일정 관리, 공지, 정산, 출석, 과제 제출, 회원 등록, 동아리 지원, 반복 일정과 반복 공지까지. 구글 캘린더·시트·설문에 노션과 카카오톡을 오가는 일을 <strong>한 제품으로 통합하고 싶었어요.</strong></p>
@@ -317,6 +329,12 @@
       <img src="reference/clip-3.png" alt="모바일 참여자 앱의 자동 출석 체크 화면">
       <figcaption class="caption">모바일 · 참여자용 자동 출석</figcaption>
     </figure>
+  </div>
+  </div>
+  <button type="button" class="fold-btn" aria-expanded="false">
+    <span class="fold-btn-label">더 보기</span>
+    <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M1.5 3.5L5 7l3.5-3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
   </div>
 
   <h2>이탈은 기능이 아니라 가입에서 났어요</h2>
@@ -401,6 +419,14 @@ const io=new IntersectionObserver(es=>{
   es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('is-in');io.unobserve(e.target);}});
 },{threshold:.12});
 document.querySelectorAll('[data-reveal]').forEach(el=>io.observe(el));
+document.querySelectorAll('.fold-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const fold=btn.closest('.fold');
+    const open=fold.classList.toggle('is-open');
+    btn.setAttribute('aria-expanded',open?'true':'false');
+    btn.querySelector('.fold-btn-label').textContent=open?'접기':'더 보기';
+  });
+});
 </script>
 </body>
 </html>
